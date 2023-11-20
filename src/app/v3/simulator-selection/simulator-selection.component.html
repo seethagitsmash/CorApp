@@ -1,0 +1,73 @@
+<div class="main_div">
+  <div style="display: flex">
+    <img
+      src="/assets/rs.png"
+      alt="logo"
+      style="width: 14%; margin-left: 20px; padding-top: 1%"
+    />
+
+    <button
+      nz-button
+      nzType="primary"
+      style="
+        position: absolute;
+        right: 0;
+        margin: 2%;
+        display: flex;
+        background-color: #002060;
+      "
+      class="logout"
+      (click)="handleLogout()"
+    >
+      <img
+        src="/assets/logout.svg"
+        alt="logo"
+        style="transform: rotate(180deg); margin-top: 3px"
+      />
+      &nbsp; Logout
+    </button>
+  </div>
+
+  <div class="main2_div">
+    <div class="border_div">
+      <div class="header">Select Simulator</div>
+
+      <div class="body row">
+        <div class="row d_row">
+          <div class="col-sm text-right">
+            <label>Single City/brand Simulator</label>
+            <br />
+            <label class="font-weight-bold">OR</label>
+            <br />
+            <label>Multi City/Multi brand Simulator</label>
+          </div>
+
+          <div class="col-sm">
+            <button
+              nz-button
+              nzType="primary"
+              class=""
+              (click)="handleNextPage('single')"
+            >
+              Click here &rarr;
+            </button>
+            <br />
+            <br />
+            <br />
+            <button
+              nz-button
+              nzType="primary"
+              class="multi"
+              [disabled]="isLoading"
+              (click)="handleNextPage('multi')"
+            >
+              Click here &rarr;
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer"></div>
+    </div>
+  </div>
+</div>

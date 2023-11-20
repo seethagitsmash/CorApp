@@ -1,0 +1,193 @@
+<div class="main_div">
+  <div style="display: flex">
+    <img
+      src="/assets/rs.png"
+      alt="logo"
+      style="width: 14%; margin-left: 20px; padding-top: 1%"
+    />
+
+    <button
+      nz-button
+      nzType="primary"
+      style="
+        position: absolute;
+        right: 0;
+        margin: 2%;
+        display: flex;
+        background-color: #002060;
+      "
+      class="logout"
+      (click)="handleLogout()"
+    >
+      <img
+        src="/assets/logout.svg"
+        alt="logo"
+        style="transform: rotate(180deg); margin-top: 3px"
+      />
+      &nbsp; Logout
+    </button>
+  </div>
+
+  <div class="main2_div">
+    <div class="border_div">
+      <div class="header">Old Car - Additional Information 1</div>
+
+      <div class="body d_row">
+        <div class="note">
+          <label>GWP in Lakhs Per Annum</label>
+        </div>
+
+        <div class="row">
+          <div class="col l_col">
+            <div class="row">
+              <div class="col">
+                <div class="row">
+                  <div class="col">
+                    <label class="g_head mb-0">Type</label>
+                    <label class="bg_b mb-1">Old Car</label>
+                  </div>
+
+                  <div class="col">
+                    <label class="g_head mb-0">GWP</label>
+                    <label class="bg_b mb-1">{{ old_gwp }}</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col r_col">
+            <div class="row">
+              <div class="col">
+                <div class="row">
+                  <div class="col">
+                    <label class="g_head mb-0"
+                      >Renewal GWP <span class="text-danger">*</span></label
+                    >
+                    <input
+                      class="mb-1"
+                      type="number"
+                      placeholder="100"
+                      id="renewal"
+                      [(ngModel)]="renewal"
+                      (change)="handleAutoUpdate()"
+                      [ngClass]="{ error: checkError('renewal') }"
+                    />
+                  </div>
+
+                  <div class="col">
+                    <label class="g_head mb-0">Rollover GWP</label>
+                    <input
+                      disabled
+                      class="mb-1 bg_b mt-0"
+                      type="number"
+                      placeholder="00"
+                      id="rollover"
+                      [(ngModel)]="rollover"
+                      [ngClass]="{ error: checkError('rollover') }"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- SOD and Comprehensive -->
+        <div class="row">
+          <div class="col l_col oc">
+            <div class="row">
+              <div class="col">
+                <div class="row">
+                  <div class="col">
+                    <label class="bg_b old_cr mb-0">Old car</label>
+                  </div>
+
+                  <div class="col">
+                    <label class="g_head mb-0"
+                      >SOD <span class="text-danger">*</span></label
+                    >
+                    <label class="mt_7 g_head mb-1">Comp</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col r_col">
+            <div class="row">
+              <div class="col">
+                <div class="row">
+                  <div class="col">
+                    <input
+                      class="mb-1"
+                      type="number"
+                      placeholder="00"
+                      id="renewal_sod"
+                      [(ngModel)]="renewal_sod"
+                      (change)="handleAutoUpdate()"
+                      [ngClass]="{ error: checkError('renewal_sod') }"
+                    />
+                    <input
+                      disabled
+                      class="mb-1 bg_b mt-0"
+                      type="number"
+                      placeholder="100"
+                      id="renewal_comp"
+                      [(ngModel)]="renewal_comp"
+                      [ngClass]="{ error: checkError('renewal_comp') }"
+                    />
+                  </div>
+
+                  <div class="col">
+                    <input
+                      class="mb-1"
+                      type="number"
+                      placeholder="00"
+                      id="rollover_sod"
+                      [(ngModel)]="rollover_sod"
+                      (change)="handleAutoUpdate()"
+                      [ngClass]="{ error: checkError('rollover_sod') }"
+                    />
+                    <input
+                      disabled
+                      class="mb-1 bg_b mt-0"
+                      type="number"
+                      placeholder="00"
+                      id="rollover_comp"
+                      [(ngModel)]="rollover_comp"
+                      [ngClass]="{ error: checkError('rollover_comp') }"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer">
+        <button
+          nz-button
+          n
+          class="g_head"
+          zType="primary"
+          class=""
+          (click)="handleBackPage()"
+        >
+          &larr; Back
+        </button>
+        <button
+          nz-button
+          class="g_head"
+          zType="primary"
+          class="next"
+          (click)="handleNextPage()"
+          [disabled]="isLoading"
+        >
+          Next &rarr;
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

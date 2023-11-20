@@ -1,0 +1,201 @@
+<div class="main_div h-100">
+  <nz-spin [nzSize]="'large'" [nzSpinning]="isSpinning" style="height: 100%">
+    <div style="display: flex">
+      <img
+        src="/assets/rs.png"
+        alt="logo"
+        style="width: 14%; margin-left: 20px; padding-top: 1%"
+      />
+
+      <button
+        nz-button
+        nzType="primary"
+        style="
+          position: absolute;
+          right: 0;
+          margin: 2%;
+          display: flex;
+          background-color: #002060;
+        "
+        class="logout"
+        (click)="handleLogout()"
+      >
+        <img
+          src="/assets/logout.svg"
+          alt="logo"
+          style="transform: rotate(180deg); margin-top: 3px"
+        />
+        &nbsp; Logout
+      </button>
+    </div>
+
+    <div class="main2_div">
+      <div class="border_div">
+        <div class="header">OD TP Mix and Commission rate</div>
+
+        <div class="body row d_row">
+          <div class="col l_col">
+            <div class="row">
+              <div class="col">
+                <div class="row mb-1">
+                  <div class="col">
+                    <label class="g_head">Car Type</label>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col">
+                    <label class="g_head mb-3">Type</label>
+                    <label class="bg_b mt_7 mb-1">New Car</label>
+                    <label class="bg_b mt_7 mb-1">Old Car</label>
+                  </div>
+
+                  <div class="col">
+                    <label class="g_head mb-3">GWP</label>
+                    <label class="bg_b mt_7 mb-1">{{ new_gwp }}</label>
+                    <label class="bg_b mt_7 mb-1">{{ old_gwp }}</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col r_col">
+            <div class="row">
+              <div class="col">
+                <div class="row mb-1">
+                  <div class="col">
+                    <label class="pg_head">GWP</label>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col">
+                    <label class="lg_head mb-3">OD</label>
+                    <input
+                      disabled
+                      class="mb-1 bg_b"
+                      type="number"
+                      placeholder="00"
+                      id="gwp"
+                      autofocus
+                      [(ngModel)]="gwp_od"
+                      [ngClass]="{ error: checkError('gwp_od') }"
+                    />
+                    <input
+                      disabled
+                      class="mb-1 bg_b"
+                      type="number"
+                      placeholder="00"
+                      id="gwp"
+                      [value]="old_gwp_od"
+                      [ngClass]="{ error: checkError('old_gwp_od') }"
+                    />
+                  </div>
+
+                  <div class="col">
+                    <label class="lg_head mb-3">TP</label>
+                    <input
+                      class="mb-1 bg_b"
+                      disabled
+                      type="number"
+                      placeholder="00"
+                      id="gwp"
+                      [(ngModel)]="gwp_tp"
+                      [ngClass]="{ error: checkError('gwp_tp') }"
+                    />
+                    <input
+                      class="mb-1 bg_b"
+                      disabled
+                      type="number"
+                      placeholder="00"
+                      id="gwp"
+                      [value]="old_gwp_tp"
+                      [ngClass]="{ error: checkError('old_gwp_tp') }"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div class="col">
+                <div class="row mb-1">
+                  <div class="col">
+                    <label class="pg_head"
+                      >Acquisition cost on OD %
+                      <span class="text-danger"> *</span></label
+                    >
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col">
+                    <label class="g_head mb-3">OD</label>
+                    <input
+                      class="mb-1"
+                      type="number"
+                      placeholder="00"
+                      id="gwp"
+                      [(ngModel)]="com_od"
+                      [ngClass]="{ error: checkError('com_od') }"
+                    />
+                    <input
+                      class="mb-1"
+                      type="number"
+                      placeholder="00"
+                      id="gwp"
+                      [(ngModel)]="old_com_od"
+                      [ngClass]="{ error: checkError('old_com_od') }"
+                    />
+                  </div>
+
+                  <div class="col">
+                    <label class="g_head mb-3">TP</label>
+                    <input
+                      class="mb-1 bg_b"
+                      type="text"
+                      placeholder="00"
+                      id="gwp"
+                      disabled
+                      [value]="com_tp"
+                    />
+                    <input
+                      disabled
+                      class="mb-1 bg_b"
+                      type="number"
+                      placeholder="00"
+                      id="gwp"
+                      [(ngModel)]="old_com_tp"
+                      [ngClass]="{ error: checkError('old_com_tp') }"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="footer">
+          <button
+            nz-button
+            class="g_head"
+            zType="primary"
+            class=""
+            (click)="handleBackPage()"
+          >
+            &larr; Back
+          </button>
+          <button
+            nz-button
+            class="g_head"
+            zType="primary"
+            class="next"
+            (click)="handleNextPage()"
+            [disabled]="isLoading"
+          >
+            Save
+          </button>
+        </div>
+      </div>
+    </div>
+  </nz-spin>
+</div>

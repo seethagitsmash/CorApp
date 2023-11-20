@@ -1,0 +1,394 @@
+<div class="main_div">
+  <nz-spin [nzSize]="'large'" [nzSpinning]="isSpinning" style="height: 100%">
+    <div style="display: flex">
+      <img
+        src="/assets/rs.png"
+        alt="logo"
+        style="width: 14%; margin-left: 20px; padding-top: 1%"
+      />
+
+      <button
+        nz-button
+        nzType="primary"
+        style="
+          position: absolute;
+          right: 0;
+          margin: 2%;
+          display: flex;
+          background-color: #002060;
+        "
+        class="logout"
+        (click)="handleLogout()"
+      >
+        <img
+          src="/assets/logout.svg"
+          alt="logo"
+          style="transform: rotate(180deg); margin-top: 3px"
+        />
+        &nbsp; Logout
+      </button>
+    </div>
+
+    <div class="main2_div">
+      <div class="border_div">
+        <div class="header">Summary</div>
+
+        <div class="body">
+          <div class="row d_row">
+            <div class="col">
+              <label></label>
+              <label>Type</label>
+              <div class="p-t-7">
+                <div class="row">
+                  <label class="bt">New Car</label>
+                </div>
+                <div class="row">
+                  <label class="bt">Old Car</label>
+                </div>
+                <div class="row m-0 btp">
+                  <label class="bt">Total</label>
+                </div>
+              </div>
+            </div>
+
+            <!-- GWP -->
+            <div class="col">
+              <label>GWP</label>
+              <div class="row tab_row_label p-t-7 od_tab">
+                <label>Total</label>
+                <label class="mid_label_l">OD</label>
+                <label class="mid_label">1Yr TP</label>
+                <label class="p-0">2&3Yr TP</label>
+              </div>
+
+              <!-- Values -->
+              <!-- new -->
+              <div class="row tab_row_label p-t-7 od_tab">
+                <label class="bt">{{ gwp_total }}</label>
+                <label class="mid_label_l bt">{{ gwp_od }}</label>
+                <label class="mid_label bt">{{ gwp_tp_1y }}</label>
+                <label class="bt">{{ gwp_tp_3y }}</label>
+              </div>
+              <!-- old -->
+              <div class="row tab_row_label od_tab">
+                <label class="bt">{{ old_gwp_total }}</label>
+                <label class="mid_label_l bt">{{ old_gwp_od }}</label>
+                <label class="mid_label bt">{{ old_gwp_tp_1y }}</label>
+                <label class="bt">{{ old_gwp_tp_3y }}</label>
+              </div>
+              <!-- total -->
+              <div class="row tab_row_label btp od_tab">
+                <label class="bt">{{ gwp_total + old_gwp_total }}</label>
+                <label class="mid_label_l bt">{{ gwp_od + old_gwp_od }} </label>
+                <label class="mid_label bt">{{
+                  gwp_tp_1y + old_gwp_tp_1y
+                }}</label>
+                <label class="bt">{{ gwp_tp_3y }}</label>
+              </div>
+            </div>
+
+            <!-- Commission -->
+            <div class="col">
+              <label>Commission</label>
+              <div class="row tab_row_label p-t-7 od_tab">
+                <label>Total</label>
+                <label class="mid_label_l">OD</label>
+                <label class="mid_label">1Yr TP</label>
+                <label class="p-0">2&3Yr TP</label>
+              </div>
+
+              <!-- Values -->
+              <div class="row tab_row_label p-t-7 od_tab">
+                <label class="bt">{{ com_total }}</label>
+                <label class="mid_label_l bt">{{ com_od }}</label>
+                <label class="mid_label bt">{{ com_tp_1y }}</label>
+                <label class="bt">{{ com_tp_3y }}</label>
+              </div>
+              <div class="row tab_row_label od_tab">
+                <label class="bt">{{ com_total }}</label>
+                <label class="mid_label_l bt">{{ old_com_od }}</label>
+                <label class="mid_label bt">{{ old_com_tp_1y }}</label>
+                <label class="bt">{{ old_com_tp_3y }}</label>
+              </div>
+              <div class="row tab_row_label btp od_tab">
+                <label class="bt">{{ com_total + com_total }}</label>
+                <label class="mid_label_l bt">{{ com_od + old_com_od }}</label>
+                <label class="mid_label bt">{{ old_com_tp_1y }}</label>
+                <label class="bt">{{ com_tp_3y }}</label>
+              </div>
+            </div>
+
+            <!-- Fuel Type -->
+            <div class="col">
+              <label>Fuel Type</label>
+              <div class="row tab_row_label p-t-7 ft_tab">
+                <label class="two_col">Diesel</label>
+                <label class="mid_label two_col2">Petrol</label>
+                <label class="two_col2">Electric</label>
+              </div>
+
+              <!-- Values -->
+              <div class="row tab_row_label p-t-7 ft_tab">
+                <label class="two_col bt">{{ diesel }}</label>
+                <label class="mid_label two_col2 bt">{{ petrol }}</label>
+                <label class="two_col2 bt">{{ electric }}</label>
+              </div>
+              <div class="row tab_row_label ft_tab">
+                <label class="two_col bt">{{ old_diesel }}</label>
+                <label class="mid_label two_col2 bt">{{ old_petrol }}</label>
+                <label class="two_col2 bt">{{ old_electric }}</label>
+              </div>
+              <div class="row tab_row_label btp ft_tab">
+                <label class="two_col bt">{{ diesel + old_diesel }}</label>
+                <label class="mid_label two_col2 bt">{{
+                  petrol + old_petrol
+                }}</label>
+                <label class="two_col2 bt">{{ electric + old_electric }}</label>
+              </div>
+            </div>
+
+            <!-- CC -->
+            <div class="col">
+              <label>Cubic Capacity CC</label>
+              <div class="row tab_row_label p-t-7">
+                <label>&lt; 1000</label>
+                <label class="mid_label l2">1000-1500</label>
+                <label>&gt; 1500</label>
+              </div>
+
+              <!-- Values -->
+              <div class="row tab_row_label p-t-7">
+                <label class="bt">{{ thou }}</label>
+                <label class="mid_label bt">{{ thou_five }}</label>
+                <label class="bt">{{ above_thou_five }}</label>
+              </div>
+              <div class="row tab_row_label">
+                <label class="bt">{{ old_thou }}</label>
+                <label class="mid_label bt">{{ old_thou_five }}</label>
+                <label class="bt">{{ old_above_thou_five }}</label>
+              </div>
+              <div class="row tab_row_label btp">
+                <label class="bt">{{ thou + old_thou }}</label>
+                <label class="mid_label bt">{{
+                  thou_five + old_thou_five
+                }}</label>
+                <label class="bt">{{
+                  above_thou_five + old_above_thou_five
+                }}</label>
+              </div>
+            </div>
+
+            <!-- NCB -->
+            <div class="col">
+              <label>NCB Flag</label>
+              <div class="row tab_row_label p-t-7">
+                <label class="two_col">NCB</label>
+                <label class="two_col2">Non-NCB</label>
+              </div>
+
+              <!-- Values -->
+              <div class="row tab_row_label p-t-7">
+                <label class="two_col bt">--</label>
+                <label class="two_col2 bt">--</label>
+              </div>
+              <div class="row tab_row_label">
+                <label class="two_col bt">{{ old_ncb }}</label>
+                <label class="two_col2 bt">{{ old_non_ncb }}</label>
+              </div>
+              <div class="row tab_row_label btp">
+                <label class="two_col bt">{{ old_ncb }}</label>
+                <label class="two_col2 bt">{{ old_non_ncb }}</label>
+              </div>
+            </div>
+
+            <!-- Vehicle Age -->
+            <div class="col">
+              <label>Vehicle Age</label>
+              <div class="row tab_row_label p-t-7">
+                <label>1-4</label>
+                <label class="mid_label">5-10</label>
+                <label>&gt;10</label>
+              </div>
+
+              <!-- Values -->
+              <div class="row tab_row_label p-t-7">
+                <label class="bt">--</label>
+                <label class="mid_label bt">--</label>
+                <label class="bt">--</label>
+              </div>
+              <div class="row tab_row_label">
+                <label class="bt">{{ old_four }}</label>
+                <label class="mid_label bt">{{ old_ten }}</label>
+                <label class="bt">{{ old_above_ten }}</label>
+              </div>
+              <div class="row tab_row_label btp">
+                <label class="bt">{{ old_four }}</label>
+                <label class="mid_label bt">{{ old_ten }}</label>
+                <label class="bt">{{ old_above_ten }}</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="row d2_row">
+            <div class="col">
+              <div class="row bg-green">Select Dealer Name</div>
+              <div class="row dealer_inp">
+                <nz-select
+                  nzShowSearch
+                  nzAllowClear
+                  nzPlaceHolder=""
+                  [(ngModel)]="dealer_name"
+                  [ngClass]="{ error: checkError('dealer_name') }"
+                >
+                  <nz-option
+                    *ngFor="let dealer of dealerList"
+                    [nzLabel]="dealer.dealer"
+                    [nzValue]="dealer.dealer"
+                  ></nz-option>
+                </nz-select>
+              </div>
+            </div>
+
+            <div class="or">OR</div>
+
+            <div class="col">
+              <div class="row baCode">
+                <div class="col">
+                  <div class="row bg-green">Select BA code</div>
+                  <div class="row dealer_inp bacinp">
+                    <input
+                      class=""
+                      type="text"
+                      placeholder="00"
+                      id="ba_code"
+                      [(ngModel)]="ba_code"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div class="row perios">
+                <div class="col">
+                  <div class="row">
+                    <div class="col bg-green">Start Month</div>
+                    <div class="col bg-green">Year</div>
+                  </div>
+
+                  <div class="row">
+                    <input
+                      class="col dealer_inp"
+                      type="number"
+                      placeholder="00"
+                      id="month"
+                      min="1"
+                      max="12"
+                      [(ngModel)]="month"
+                      [ngClass]="{ error: checkError('month') }"
+                    />
+                    <input
+                      class="col dealer_inp"
+                      type="number"
+                      placeholder="00"
+                      id="year"
+                      min="2023"
+                      [(ngModel)]="year"
+                      [ngClass]="{ error: checkError('year') }"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="or">OR</div>
+
+            <div class="col">
+              <button
+                nz-button
+                nzType="primary"
+                class="bg-green"
+                (click)="handleModalVisible()"
+              >
+                Add New BA Code
+              </button>
+              <!-- <div class="row bg-green">Add New BA Code</div>
+            <div class="row dealer_inp">
+              <input
+                class="deal_inp"
+                type="text"
+                placeholder="00"
+                id="new_ba"
+                [(ngModel)]="new_ba_code"
+              />
+            </div> -->
+            </div>
+          </div>
+        </div>
+
+        <div class="footer">
+          <button
+            nz-button
+            nzType="primary"
+            class=""
+            (click)="handleBackPage()"
+          >
+            &larr; Back
+          </button>
+          <button
+            nz-button
+            nzType="primary"
+            class="next"
+            (click)="saveModel()"
+            [disabled]="isLoading"
+          >
+            Save and Proceed
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <nz-modal
+      nzCentered
+      [(nzVisible)]="isBaModalVisible"
+      nzTitle="Add New BA Code"
+      [nzFooter]="modalFooter"
+      (nzOnCancel)="handleModalVisible()"
+      nzMaskClosable="false"
+    >
+      <ng-container *nzModalContent>
+        <div class="row ba_comp">
+          <div class="row">
+            <label class="col">BA code</label>
+            <div class="col">
+              <input class="" type="text" placeholder="00" id="new_ba_code" />
+            </div>
+          </div>
+          <div class="row mt-3">
+            <label class="col">Group</label>
+            <div class="col">
+              <input class="" type="text" placeholder="00" id="new_ba_group" />
+            </div>
+          </div>
+        </div>
+      </ng-container>
+
+      <ng-template #modalFooter>
+        <button
+          nz-button
+          nzType="default"
+          class="close_summary"
+          (click)="handleModalVisible()"
+        >
+          Close Summary
+        </button>
+        <button
+          nz-button
+          nzType="primary"
+          class="save_proceed"
+          (click)="handleAddBa()"
+        >
+          Save and Use
+        </button>
+      </ng-template>
+    </nz-modal>
+  </nz-spin>
+</div>

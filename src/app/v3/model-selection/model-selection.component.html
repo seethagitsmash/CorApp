@@ -1,0 +1,291 @@
+<div class="main_div">
+  <div style="display: flex">
+    <img
+      src="/assets/rs.png"
+      alt="logo"
+      style="width: 14%; margin-left: 20px; padding-top: 1%"
+    />
+
+    <button
+      nz-button
+      nzType="primary"
+      style="
+        position: absolute;
+        right: 0;
+        margin: 2%;
+        display: flex;
+        background-color: #002060;
+      "
+      class="logout"
+      (click)="handleLogout()"
+    >
+      <img
+        src="/assets/logout.svg"
+        alt="logo"
+        style="transform: rotate(180deg); margin-top: 3px"
+      />
+      &nbsp; Logout
+    </button>
+  </div>
+
+  <div class="main2_div">
+    <div class="border_div">
+      <div class="header">Select Model wise Expected GWP</div>
+
+      <div class="body">
+        <table class="table">
+          <thead>
+            <tr class="tbl_subhd">
+              <th class="" scope="col"></th>
+              <th class="dummy"></th>
+              <th class="list" scope="col"></th>
+              <th class="dummy"></th>
+              <th class="list bg_yel" scope="col">{{ make }}</th>
+              <th class="dummy"></th>
+              <th class="list bg_yel prz" scope="col">Annual GWP</th>
+              <th class="dummy bg_yel">-</th>
+              <th class="list bg_yel plz" scope="col">(In Lakhs)</th>
+              <th class="dummy"></th>
+              <th class="" scope="col"></th>
+            </tr>
+
+            <tr class="tbl_hd">
+              <th class="sno" scope="col">S.No</th>
+              <th class="dummy"></th>
+              <th class="list" scope="col">Fuel Selection</th>
+              <th class="dummy"></th>
+              <th class="list" scope="col">Model</th>
+              <th class="dummy"></th>
+              <th class="list" scope="col">(1+3) New car GWP</th>
+              <th class="dummy"></th>
+              <th class="list" scope="col">Old car GWP</th>
+              <th class="dummy"></th>
+              <th class="addR" scope="col">Add / Del</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let rowList of rowLists; let i = index">
+              <th class="text-center" scope="row">{{ i + 1 }}</th>
+              <td></td>
+              <td>
+                <nz-select
+                  class="select"
+                  multiple="false"
+                  matInput
+                  [(ngModel)]="rowList.fuel"
+                  [ngClass]="{ error: checkError(i, 'fuel') }"
+                  (ngModelChange)="handleResetModelInput(i)"
+                >
+                  <nz-option
+                    *ngFor="let fuel of fuelList"
+                    [nzValue]="fuel.name"
+                    [nzLabel]="fuel.name"
+                  />
+                </nz-select>
+              </td>
+              <td></td>
+              <td>
+                <!-- Diesel Vehicle List -->
+                <nz-select
+                  *ngIf="rowList.fuel === 'Diesel'"
+                  class="select"
+                  multiple="false"
+                  matInput
+                  [(ngModel)]="rowList.model"
+                  [ngClass]="{ error: checkError(i, 'model') }"
+                >
+                  <nz-option
+                    *ngFor="let model of modelDieselList"
+                    [nzValue]="model.model"
+                    [nzLabel]="model.model"
+                  />
+                </nz-select>
+
+                <!-- Petrol Vehicle List -->
+                <nz-select
+                  *ngIf="rowList.fuel === 'Petrol'"
+                  class="select"
+                  multiple="false"
+                  matInput
+                  [(ngModel)]="rowList.model"
+                  [ngClass]="{ error: checkError(i, 'model') }"
+                >
+                  <nz-option
+                    *ngFor="let model of modelPetrolList"
+                    [nzValue]="model.model"
+                    [nzLabel]="model.model"
+                  />
+                </nz-select>
+
+                <!-- Electric Vehicle List -->
+                <nz-select
+                  *ngIf="rowList.fuel === 'Electric'"
+                  class="select"
+                  multiple="false"
+                  matInput
+                  [(ngModel)]="rowList.model"
+                  [ngClass]="{ error: checkError(i, 'model') }"
+                >
+                  <nz-option
+                    *ngFor="let model of modelElectricList"
+                    [nzValue]="model.model"
+                    [nzLabel]="model.model"
+                  />
+                </nz-select>
+                <nz-select
+                  *ngIf="
+                    rowList.fuel !== 'Diesel' &&
+                    rowList.fuel !== 'Petrol' &&
+                    rowList.fuel !== 'Electric'
+                  "
+                  class="select"
+                  multiple="false"
+                  matInput
+                  [(ngModel)]="rowList.model"
+                  [ngClass]="{ error: checkError(i, 'model') }"
+                >
+                  <nz-option nzLabel="-- Select fuel type --" />
+                </nz-select>
+              </td>
+              <td></td>
+              <td>
+                <input
+                  class="mb-1"
+                  type="number"
+                  placeholder="00"
+                  id="new"
+                  [(ngModel)]="rowList.new_gwp"
+                  [ngClass]="{ error: checkError(i, 'new') }"
+                />
+              </td>
+              <td></td>
+              <td>
+                <input
+                  class="mb-1"
+                  type="number"
+                  placeholder="00"
+                  id="old"
+                  [(ngModel)]="rowList.old_gwp"
+                  [ngClass]="{ error: checkError(i, 'old') }"
+                />
+              </td>
+              <td></td>
+              <td class="addRemove" *ngIf="rowLists.length === 1">
+                <button nz-button (click)="handleAddRow(rowList.ref_id)">
+                  <span nz-icon nzType="plus" nzTheme="outline"></span>
+                </button>
+              </td>
+
+              <td
+                class="addRemove_last"
+                *ngIf="rowLists.length === i + 1 && rowLists.length !== 1"
+              >
+                <button
+                  nz-button
+                  (click)="handleRemoveRow(i)"
+                  class="minus_btn"
+                >
+                  <span nz-icon nzType="minus" nzTheme="outline"></span>
+                </button>
+                <button nz-button (click)="handleAddRow(rowList.ref_id)">
+                  <span nz-icon nzType="plus" nzTheme="outline"></span>
+                </button>
+              </td>
+
+              <td class="addRemove" *ngIf="rowLists.length !== i + 1">
+                <button
+                  nz-button
+                  class="addRemove"
+                  (click)="handleRemoveRow(i)"
+                >
+                  <span nz-icon nzType="minus" nzTheme="outline"></span>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="footer">
+        <button nz-button nzType="primary" class="" (click)="handleBackPage()">
+          &larr; Back
+        </button>
+
+        <button
+          nz-button
+          nzType="primary"
+          class="next summbtn"
+          (click)="handleModalVisible()"
+          [disabled]="isLoading"
+        >
+          View Summary
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <nz-modal
+    nzCentered
+    [(nzVisible)]="isModalVisible"
+    [nzTitle]="modalTitle"
+    [nzFooter]="modalFooter"
+    (nzOnCancel)="handleModalVisible()"
+    nzMaskClosable="false"
+  >
+    <ng-container *nzModalContent>
+      <table class="table_modal">
+        <thead>
+          <tr>
+            <th class="sno" scope="col">S.No</th>
+            <th class="list" scope="col">Make</th>
+            <th class="list" scope="col">Model</th>
+            <th class="list" scope="col">Fuel</th>
+            <th class="list" scope="col">New car</th>
+            <th class="list" scope="col">Old car</th>
+            <th class="list bg-yel" scope="col">Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let rowList of rowLists; let i = index">
+            <th class="text-center" scope="row">{{ i + 1 }}</th>
+            <td>{{ make }}</td>
+            <td>{{ rowList.model }}</td>
+            <td>{{ rowList.fuel }}</td>
+            <td>{{ rowList.new_gwp }}</td>
+            <td>{{ rowList.old_gwp }}</td>
+            <td class="bg-yel">{{ +rowList.new_gwp + +rowList.old_gwp }}</td>
+          </tr>
+
+          <tr>
+            <th scope="row"></th>
+            <td></td>
+            <td></td>
+            <td class="bg-yel">Total</td>
+            <td class="bg-yel">{{ new_car_total }}</td>
+            <td class="bg-yel">{{ old_car_total }}</td>
+            <td class="bg-blu">{{ new_car_total + old_car_total }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </ng-container>
+
+    <ng-template #modalFooter>
+      <button
+        nz-button
+        nzType="default"
+        class="close_summary"
+        (click)="handleModalVisible()"
+      >
+        Close Summary
+      </button>
+      <button
+        nz-button
+        nzType="primary"
+        class="save_proceed"
+        (click)="handleSaveModel()"
+      >
+        Save and Proceed
+      </button>
+    </ng-template>
+  </nz-modal>
+</div>

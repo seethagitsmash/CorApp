@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>CorDashboard</title>
+    <base href="/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="/favicon.ico" href="favicon.ico" />
+    <script type="text/javascript">
+      var clevertap = {
+        event: [],
+        profile: [],
+        account: [],
+        onUserLogin: [],
+        notifications: [],
+        privacy: [],
+      };
+      clevertap.account.push({ id: "R59-KK5-996Z" });
+      clevertap.privacy.push({ optOut: false });
+      clevertap.privacy.push({ useIP: false });
+      console.log(
+        clevertap,
+        "clevertap clevertap"
+      )(function () {
+        var wzrk = document.createElement("script");
+        console.log(wzrk, "wzrk");
+        wzrk.type = "text/javascript";
+        wzrk.async = true;
+        wzrk.src =
+          ("https:" == document.location.protocol
+            ? "https://d2r1yp2w7bby2u.cloudfront.net"
+            : "http://static.clevertap.com") + "/js/clevertap.min.js";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(wzrk, s);
+      })();
+    </script>
+  </head>
+  <body class="main">
+    <app-root></app-root>
+  </body>
+</html>

@@ -1,0 +1,46 @@
+<div class="main_div">
+  <img
+    src="/assets/rs.png"
+    alt="logo"
+    style="width: 14%; margin-left: 20px; padding-top: 1%"
+  />
+  <div class="main2_div">
+    <div class="border_div">
+      <div class="header">COR Simulator</div>
+
+      <!-- LOGO -->
+      <div class="body row">
+        <div class="row d_row">
+          <div class="col-sm text-right">
+            <label>Username</label>
+            <br />
+            <label>Password</label>
+          </div>
+          <div class="col-sm">
+            <input
+              type="text"
+              placeholder="Username"
+              id="username"
+              required
+              autofocus
+              [(ngModel)]="userName"
+            />
+            <br />
+            <input type="password" placeholder="*******" [(ngModel)]="pwd" />
+            <br />
+
+            <button
+              nz-button
+              nzType="primary"
+              class=""
+              [disabled]="isLoading"
+              (click)="handleAuthentication()"
+            >
+              Login
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,29 @@
+/* You can add global styles to this file, and also import other style files */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.main {
+  background-color: #e6e7ee8f;
+  font-family: Poppins;
+}
+
+.h_back_btn svg {
+  margin-bottom: 6px;
+}
+
+::ng-deep {
+  svg {
+    fill: red !important;
+  }
+
+  .ant-message-notice-content {
+    background: #ff4d4f6e !important;
+    color: white !important;
+    background-color: #ff4d4f6e !important;
+  }
+}
+
+.error {
+  border: 1px solid red !important;
+}

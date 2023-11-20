@@ -1,0 +1,92 @@
+<div class="main_div">
+  <div style="display: flex">
+    <img
+      src="/assets/rs.png"
+      alt="logo"
+      style="width: 14%; margin-left: 20px; padding-top: 1%"
+    />
+
+    <button
+      nz-button
+      nzType="primary"
+      style="
+        position: absolute;
+        right: 0;
+        margin: 2%;
+        display: flex;
+        background-color: #002060;
+      "
+      class="logout"
+      (click)="handleLogout()"
+    >
+      <img
+        src="/assets/logout.svg"
+        alt="logo"
+        style="transform: rotate(180deg); margin-top: 3px"
+      />
+      &nbsp; Logout
+    </button>
+  </div>
+
+  <div class="main2_div">
+    <div class="border_div">
+      <div class="header">Premium Business Mix</div>
+
+      <div class="body">
+        <div class="row d_row">
+          <div class="col">
+            <label>New Car</label>
+            <br />
+            <input
+              disabled
+              type="text"
+              placeholder="0"
+              id="new"
+              required
+              [value]="new"
+            />
+          </div>
+
+          <div class="col">
+            <label>Old Car</label>
+            <br />
+            <input
+              disabled
+              type="text"
+              placeholder="0"
+              id="old"
+              required
+              [value]="old"
+            />
+          </div>
+
+          <div class="col">
+            <label>Total GWP</label>
+            <br />
+            <input
+              disabled
+              type="text"
+              placeholder="0"
+              id="total_gwp"
+              [value]="total_gwp"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div class="footer">
+        <button nz-button nzType="primary" class="" (click)="handleBackPage()">
+          &larr; Back
+        </button>
+        <button
+          nz-button
+          nzType="primary"
+          class="next"
+          (click)="handleNextPage()"
+        >
+          Next &rarr;
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

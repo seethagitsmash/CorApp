@@ -1,0 +1,82 @@
+<div class="main_div">
+  <div style="display: flex">
+    <img
+      src="/assets/rs.png"
+      alt="logo"
+      style="width: 14%; margin-left: 20px; padding-top: 1%"
+    />
+
+    <button
+      nz-button
+      nzType="primary"
+      style="
+        position: absolute;
+        right: 0;
+        margin: 2%;
+        display: flex;
+        background-color: #002060;
+      "
+      class="logout"
+      (click)="handleLogout()"
+    >
+      <img
+        src="/assets/logout.svg"
+        alt="logo"
+        style="transform: rotate(180deg); margin-top: 3px"
+      />
+      &nbsp; Logout
+    </button>
+  </div>
+
+  <div class="main2_div">
+    <div class="border_div">
+      <div class="header">Select City</div>
+
+      <div class="body row">
+        <nz-select
+          id="search_list"
+          nzShowSearch
+          nzAllowClear
+          nzPlaceHolder="Select a city"
+          [(ngModel)]="selectedCity"
+          (ngModelChange)="handleNextPage()"
+        >
+          <nz-option
+            *ngFor="let options of listOfOption"
+            [nzLabel]="options.city"
+            [nzValue]="options.city"
+          ></nz-option>
+        </nz-select>
+
+        <div class="row row_opt">
+          <div
+            *ngFor="let options of listOfOption"
+            class="option"
+            (click)="handleCitySelection(options.city)"
+            data-bs-toggle="tooltip"
+            [title]="options.city"
+          >
+            {{ options.city }} &rarr;
+          </div>
+        </div>
+      </div>
+
+      <div class="footer">
+        <button nz-button nzType="primary" class="" (click)="handleBackPage()">
+          &larr; Back
+        </button>
+
+        <button
+          nz-button
+          class="g_head"
+          zType="primary"
+          class="next"
+          (click)="handleNextPage()"
+          [ngClass]="{ hide: isCityNotSelected() }"
+        >
+          Next &rarr;
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

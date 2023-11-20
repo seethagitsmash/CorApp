@@ -1,0 +1,152 @@
+<div class="main_div">
+  <div style="display: flex">
+    <img
+      src="/assets/rs.png"
+      alt="logo"
+      style="width: 14%; margin-left: 20px; padding-top: 1%"
+    />
+
+    <button
+      nz-button
+      nzType="primary"
+      style="
+        position: absolute;
+        right: 0;
+        margin: 2%;
+        display: flex;
+        background-color: #002060;
+      "
+      class="logout"
+      (click)="handleLogout()"
+    >
+      <img
+        src="/assets/logout.svg"
+        alt="logo"
+        style="transform: rotate(180deg); margin-top: 3px"
+      />
+      &nbsp; Logout
+    </button>
+  </div>
+
+  <div class="main2_div">
+    <div class="border_div">
+      <div class="header">Projected COR %</div>
+
+      <div class="body">
+        <div class="note">
+          <label>Dealer Name: {{ dealer_name }}</label>
+        </div>
+        <div class="row d_row">
+          <div class="col cat_2">
+            <label>Year</label>
+            <br />
+            <label class="mt-1 mb-1 yr1"> 1st Yr</label>
+            <label class="yr3">
+              2nd & 3rd Year <br />
+              Fully earned</label
+            >
+          </div>
+
+          <div class="col cat_1">
+            <label>LR %</label>
+            <br />
+            <input
+              disabled
+              type="text"
+              placeholder="00"
+              id="old"
+              required
+              [value]="lr"
+            />
+
+            <input
+              disabled
+              type="text"
+              placeholder="00"
+              id="old"
+              required
+              [value]="lr"
+            />
+          </div>
+
+          <div class="col cat_1">
+            <label>DC %</label>
+            <br />
+            <input
+              disabled
+              type="text"
+              placeholder="00"
+              id="new"
+              required
+              autofocus
+              [value]="dc"
+            />
+
+            <input
+              disabled
+              type="text"
+              placeholder="00"
+              id="new"
+              required
+              autofocus
+              [value]="dc"
+            />
+          </div>
+
+          <div class="col cat_1">
+            <label>EXP %</label>
+            <br />
+            <input
+              disabled
+              type="text"
+              placeholder="12"
+              id="gwp"
+              [value]="exp"
+            />
+            <input
+              disabled
+              type="text"
+              placeholder="12"
+              id="gwp"
+              [value]="exp"
+            />
+          </div>
+
+          <div class="col cat_2">
+            <label>COR %</label>
+            <br />
+            <input
+              disabled
+              type="text"
+              placeholder="0"
+              id="gwp"
+              [value]="cor"
+            />
+            <input
+              disabled
+              type="text"
+              placeholder="0"
+              id="gwp"
+              [value]="cor"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div class="footer">
+        <button nz-button nzType="primary" class="" (click)="handleBackPage()">
+          &larr; Back
+        </button>
+        <button
+          nz-button
+          class="next"
+          [disabled]="isLoading"
+          nzType="primary"
+          (click)="handleNextPage()"
+        >
+          Send For Approval &rarr;
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
