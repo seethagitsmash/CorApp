@@ -1,0 +1,318 @@
+<!--Main Navigation-->
+<header>
+  <!-- Sidebar -->
+  <nav id="sidebarMenu" class="collapse d-lg-block sidebar collapse bg-white">
+    <div class="position-sticky">
+      <div class="list-group list-group-flush mx-3 mt-4">
+        <a
+          (click)="handleNav('dashboard')"
+          class="list-group-item list-group-item-action py-2 ripple"
+        >
+          <i class="fas fa-lock fa-fw me-3"></i><span>Dashboard</span>
+        </a>
+        <a
+          (click)="handleNav('profile')"
+          class="list-group-item list-group-item-action py-2 ripple active"
+          ><i class="fas fa-lock fa-fw me-3"></i><span>New User</span></a
+        >
+        <a
+          (click)="handleNav('edit')"
+          class="list-group-item list-group-item-action py-2 ripple"
+          ><i class="fas fa-lock fa-fw me-3"></i><span>Edit User</span></a
+        >
+      </div>
+    </div>
+  </nav>
+  <!-- Sidebar -->
+
+  <!-- Navbar -->
+  <nav
+    id="main-navbar"
+    class="navbar navbar-expand-lg navbar-light bg-white fixed-top"
+  >
+    <!-- Container wrapper -->
+    <div class="container-fluid">
+      <!-- Toggle button -->
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-mdb-toggle="collapse"
+        data-mdb-target="#sidebarMenu"
+        aria-controls="sidebarMenu"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <i class="fas fa-bars"></i>
+      </button>
+
+      <!-- Brand -->
+      <a class="navbar-brand">
+        <img src="/assets/rs.png" height="40" alt="MDB Logo" loading="lazy" />
+      </a>
+      <!-- Search form -->
+      <!-- <form class="d-none d-md-flex input-group w-auto my-auto">
+          <input
+            autocomplete="off"
+            type="search"
+            class="form-control rounded"
+            placeholder='Search (ctrl + "/" to focus)'
+            style="min-width: 225px"
+          />
+          <span class="input-group-text border-0"
+            ><i class="fas fa-search"></i
+          ></span>
+        </form> -->
+
+      <!-- Right links -->
+      <ul class="navbar-nav ms-auto d-flex flex-row">
+        <!-- Avatar -->
+        <li class="nav-item dropdown">
+          <a
+            class="nav-link hidden-arrow d-flex align-items-center"
+            (click)="handleNav('')"
+            id="navbarDropdownMenuLink"
+            role="button"
+            aria-expanded="false"
+          >
+            Logout
+          </a>
+        </li>
+      </ul>
+    </div>
+    <!-- Container wrapper -->
+  </nav>
+  <!-- Navbar -->
+</header>
+<!--Main Navigation-->
+
+<!--Main layout-->
+<main style="margin-top: 58px">
+  <div class="container">
+    <div class="row mb-4">
+      <div class="col-lg-8 mx-auto text-center">
+        <h3 class="fw-bold">Create a new user | Information 1</h3>
+      </div>
+    </div>
+
+    <div class="mx-auto">
+      <div class="bg-white rounded-lg shadow p-5">
+        <!-- Credit card form content -->
+        <div class="tab-content">
+          <!-- credit card info-->
+          <div id="nav-tab-card" class="tab-pane fade show active">
+            <!-- <p class="alert alert-success">Some text success or error</p> -->
+
+            <div class="row container">
+              <div class="form-group">
+                <label for="username">Product code</label>
+
+                <nz-select
+                  nzMode="multiple"
+                  [(ngModel)]="product_code"
+                  (focus)="handleValidation('product_code')"
+                  (mouseenter)="handleValidation('product_code')"
+                  (ngModelChange)="
+                    handleValidation('product_code');
+                    handleChildServiceOf('product')
+                  "
+                  [ngClass]="{ error: hasFieldErrorExits('product_code') }"
+                >
+                  <nz-option
+                    *ngFor="let product of productcode"
+                    [nzLabel]="product.product"
+                    [nzValue]="product.product"
+                  ></nz-option>
+                </nz-select>
+              </div>
+
+              <div class="form-group">
+                <label for="username">LOB</label>
+                <nz-select
+                  nzMode="multiple"
+                  [(ngModel)]="lob"
+                  (focus)="handleValidation('lob')"
+                  (mouseenter)="handleValidation('lob')"
+                  (ngModelChange)="handleValidation('lob')"
+                  [ngClass]="{ error: hasFieldErrorExits('lob') }"
+                >
+                  <nz-option
+                    *ngFor="let lob of lobList"
+                    [nzLabel]="lob.lob"
+                    [nzValue]="lob.lob"
+                  ></nz-option>
+                </nz-select>
+              </div>
+
+              <div class="form-group">
+                <label for="username">Migration List</label>
+                <nz-select
+                  nzMode="multiple"
+                  [(ngModel)]="migration"
+                  (focus)="handleValidation('migration')"
+                  (mouseenter)="handleValidation('migration')"
+                  (ngModelChange)="handleValidation('migration')"
+                  [ngClass]="{ error: hasFieldErrorExits('migration') }"
+                >
+                  <nz-option
+                    *ngFor="let migration of migrationList"
+                    [nzLabel]="migration.migration"
+                    [nzValue]="migration.migration"
+                  ></nz-option>
+                </nz-select>
+              </div>
+
+              <div class="form-group">
+                <label for="username">Ageings List</label>
+                <nz-select
+                  nzMode="multiple"
+                  [(ngModel)]="ageing"
+                  (focus)="handleValidation('ageing')"
+                  (mouseenter)="handleValidation('ageing')"
+                  (ngModelChange)="handleValidation('ageing')"
+                  [ngClass]="{ error: hasFieldErrorExits('ageing') }"
+                >
+                  <nz-option
+                    *ngFor="let ageing of ageingList"
+                    [nzLabel]="ageing.ageing"
+                    [nzValue]="ageing.ageing"
+                  ></nz-option>
+                </nz-select>
+              </div>
+
+              <div class="form-group">
+                <label for="username">Channel</label>
+                <nz-select
+                  nzMode="multiple"
+                  [(ngModel)]="channel"
+                  (focus)="handleValidation('channel')"
+                  (mouseenter)="handleValidation('channel')"
+                  (ngModelChange)="
+                    handleValidation('channel'); handleChildServiceOf('channel')
+                  "
+                  [ngClass]="{ error: hasFieldErrorExits('channel') }"
+                >
+                  <nz-option
+                    *ngFor="let channel of channelcode"
+                    [nzLabel]="channel.channel_list"
+                    [nzValue]="channel.channel_list"
+                  ></nz-option>
+                </nz-select>
+              </div>
+
+              <div class="form-group">
+                <label for="username">Sub channel</label>
+                <nz-select
+                  nzMode="multiple"
+                  [(ngModel)]="sub_channel"
+                  (focus)="handleValidation('sub_channel')"
+                  (mouseenter)="handleValidation('sub_channel')"
+                  (ngModelChange)="handleValidation('sub_channel')"
+                  [ngClass]="{ error: hasFieldErrorExits('sub_channel') }"
+                >
+                  <nz-option
+                    *ngFor="let channel of subchannel"
+                    [nzLabel]="channel.sub_channel_list"
+                    [nzValue]="channel.sub_channel_list"
+                  ></nz-option>
+                </nz-select>
+              </div>
+
+              <div class="form-group">
+                <label for="username">Branch code</label>
+                <nz-select
+                  nzMode="multiple"
+                  [(ngModel)]="branch_code"
+                  (focus)="handleValidation('branch_code')"
+                  (mouseenter)="handleValidation('branch_code')"
+                  (ngModelChange)="handleValidation('branch_code')"
+                  [ngClass]="{ error: hasFieldErrorExits('branch_code') }"
+                >
+                  <nz-option
+                    *ngFor="let branch of branchcode"
+                    [nzLabel]="branch.branch_code"
+                    [nzValue]="branch.branch_code"
+                  ></nz-option>
+                </nz-select>
+              </div>
+
+              <div class="form-group">
+                <label for="username">Branch name</label>
+                <nz-select
+                  nzMode="multiple"
+                  [(ngModel)]="branch_name"
+                  (focus)="handleValidation('branch_name')"
+                  (mouseenter)="handleValidation('branch_name')"
+                  (ngModelChange)="handleValidation('branch_name')"
+                  [ngClass]="{ error: hasFieldErrorExits('branch_name') }"
+                >
+                  <nz-option
+                    *ngFor="let branch of branchname"
+                    [nzLabel]="branch.branch_name"
+                    [nzValue]="branch.branch_name"
+                  ></nz-option>
+                </nz-select>
+              </div>
+
+              <div class="form-group">
+                <label for="username">Plan option</label>
+                <nz-select
+                  nzMode="multiple"
+                  [(ngModel)]="plan"
+                  (focus)="handleValidation('plan')"
+                  (mouseenter)="handleValidation('plan')"
+                  (ngModelChange)="handleValidation('plan')"
+                  [ngClass]="{ error: hasFieldErrorExits('plan') }"
+                >
+                  <nz-option
+                    *ngFor="let plan of planList"
+                    [nzLabel]="plan.plan"
+                    [nzValue]="plan.plan"
+                  ></nz-option>
+                </nz-select>
+              </div>
+
+              <div class="form-group">
+                <label for="username">Add-on</label>
+                <nz-select
+                  nzMode="multiple"
+                  [(ngModel)]="add_on"
+                  (focus)="handleValidation('add_on')"
+                  (mouseenter)="handleValidation('add_on')"
+                  (ngModelChange)="handleValidation('add_on')"
+                  [ngClass]="{ error: hasFieldErrorExits('add_on') }"
+                >
+                  <nz-option
+                    *ngFor="let addon of addonList"
+                    [nzLabel]="addon.addon"
+                    [nzValue]="addon.addon"
+                  ></nz-option>
+                </nz-select>
+              </div>
+
+              <div>
+                <button
+                  type="button"
+                  (click)="handleNext()"
+                  class="subscribe btn btn-primary btn-block rounded shadow-sm mt-5 w-25 float-end ms-5 submit"
+                >
+                  NEXT
+                </button>
+
+                <button
+                  type="button"
+                  (click)="handleNav('profile')"
+                  class="subscribe btn btn-primary btn-block rounded shadow-sm mt-5 w-25 float-end back"
+                >
+                  BACK
+                </button>
+              </div>
+            </div>
+          </div>
+          <!-- End -->
+        </div>
+        <!-- End -->
+      </div>
+    </div>
+  </div>
+</main>
+<!--Main layout-->

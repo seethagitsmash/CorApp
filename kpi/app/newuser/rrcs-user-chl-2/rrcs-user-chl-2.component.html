@@ -1,0 +1,347 @@
+<!--Main Navigation-->
+<header>
+  <!-- Sidebar -->
+  <nav id="sidebarMenu" class="collapse d-lg-block sidebar collapse bg-white">
+    <div class="position-sticky">
+      <div class="list-group list-group-flush mx-3 mt-4">
+        <a
+          (click)="handleNav('dashboard')"
+          class="list-group-item list-group-item-action py-2 ripple"
+        >
+          <i class="fas fa-lock fa-fw me-3"></i><span>Dashboard</span>
+        </a>
+        <a
+          (click)="handleNav('profile')"
+          class="list-group-item list-group-item-action py-2 ripple active"
+          ><i class="fas fa-lock fa-fw me-3"></i><span>New User</span></a
+        >
+        <a
+          (click)="handleNav('edit')"
+          class="list-group-item list-group-item-action py-2 ripple"
+          ><i class="fas fa-lock fa-fw me-3"></i><span>Edit User</span></a
+        >
+      </div>
+    </div>
+  </nav>
+  <!-- Sidebar -->
+
+  <!-- Navbar -->
+  <nav
+    id="main-navbar"
+    class="navbar navbar-expand-lg navbar-light bg-white fixed-top"
+  >
+    <!-- Container wrapper -->
+    <div class="container-fluid">
+      <!-- Toggle button -->
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-mdb-toggle="collapse"
+        data-mdb-target="#sidebarMenu"
+        aria-controls="sidebarMenu"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <i class="fas fa-bars"></i>
+      </button>
+
+      <!-- Brand -->
+      <a class="navbar-brand">
+        <img src="/assets/rs.png" height="40" alt="MDB Logo" loading="lazy" />
+      </a>
+
+      <!-- Right links -->
+      <ul class="navbar-nav ms-auto d-flex flex-row">
+        <!-- Avatar -->
+        <li class="nav-item dropdown">
+          <a
+            class="nav-link hidden-arrow d-flex align-items-center"
+            (click)="handleNav('')"
+            id="navbarDropdownMenuLink"
+            role="button"
+            aria-expanded="false"
+          >
+            Logout
+          </a>
+        </li>
+      </ul>
+    </div>
+    <!-- Container wrapper -->
+  </nav>
+  <!-- Navbar -->
+</header>
+<!--Main Navigation-->
+
+<!--Main layout-->
+<main style="margin-top: 58px">
+  <div class="container">
+    <div class="row mb-4">
+      <div class="col-lg-8 mx-auto text-center">
+        <h3 class="fw-bold">Create a new user | Information 2</h3>
+      </div>
+    </div>
+
+    <div class="mx-auto">
+      <div class="bg-white rounded-lg shadow p-5">
+        <!-- Credit card form content -->
+        <div class="tab-content">
+          <!-- credit card info-->
+          <div id="nav-tab-card" class="tab-pane fade show active">
+            <!-- <p class="alert alert-success">Some text success or error</p> -->
+
+            <div class="row container">
+              <div class="form-group">
+                <label for="username">KPI Cluster</label>
+                <nz-select
+                  nzMode="multiple"
+                  [(ngModel)]="kpi_cluster"
+                  (focus)="handleValidation('kpi_cluster')"
+                  (mouseenter)="handleValidation('kpi_cluster')"
+                  (ngModelChange)="
+                    handleValidation('kpi_cluster');
+                    handleChildServiceOfCluster()
+                  "
+                  [ngClass]="{ error: hasFieldErrorExits('kpi_cluster') }"
+                >
+                  <nz-option
+                    *ngFor="let cluster of kpi_clusters"
+                    [nzLabel]="cluster.cluster_name"
+                    [nzValue]="cluster.cluster_name"
+                  ></nz-option>
+                </nz-select>
+              </div>
+
+              <div class="form-group">
+                <label for="username">KPI Zone</label>
+                <nz-select
+                  nzMode="multiple"
+                  [(ngModel)]="kpi_zone"
+                  (focus)="handleValidation('kpi_zone')"
+                  (mouseenter)="handleValidation('kpi_zone')"
+                  (ngModelChange)="
+                    handleValidation('kpi_zone'); handleChildServiceOfZone()
+                  "
+                  [ngClass]="{ error: hasFieldErrorExits('kpi_zone') }"
+                >
+                  <nz-option
+                    *ngFor="let zone of kpi_zones_list"
+                    [nzLabel]="zone.zone"
+                    [nzValue]="zone.zone"
+                  ></nz-option>
+                </nz-select>
+              </div>
+
+              <div class="form-group">
+                <label for="username">KPI State</label>
+                <nz-select
+                  nzMode="multiple"
+                  [(ngModel)]="kpi_state"
+                  (focus)="handleValidation('kpi_state')"
+                  (mouseenter)="handleValidation('kpi_state')"
+                  (ngModelChange)="
+                    handleValidation('kpi_state'); handleChildServiceOfState()
+                  "
+                  [ngClass]="{ error: hasFieldErrorExits('kpi_state') }"
+                >
+                  <nz-option
+                    *ngFor="let state of kpi_state_list"
+                    [nzLabel]="state.state"
+                    [nzValue]="state.state"
+                  ></nz-option>
+                </nz-select>
+              </div>
+
+              <div class="form-group">
+                <label for="username">KPI city</label>
+                <nz-select
+                  nzMode="multiple"
+                  [(ngModel)]="kpi_city"
+                  (focus)="handleValidation('kpi_city')"
+                  (mouseenter)="handleValidation('kpi_city')"
+                  (ngModelChange)="handleValidation('kpi_city')"
+                  [ngClass]="{ error: hasFieldErrorExits('kpi_city') }"
+                >
+                  <nz-option
+                    *ngFor="let city of kpi_city_list"
+                    [nzLabel]="city.city"
+                    [nzValue]="city.city"
+                  ></nz-option>
+                </nz-select>
+              </div>
+
+              <div class="form-group">
+                <label for="username">KPI B-Type</label>
+                <nz-select
+                  nzMode="multiple"
+                  [(ngModel)]="kpi_btype"
+                  (focus)="handleValidation('kpi_btype')"
+                  (mouseenter)="handleValidation('kpi_btype')"
+                  (ngModelChange)="handleValidation('kpi_btype')"
+                  [ngClass]="{ error: hasFieldErrorExits('kpi_btype') }"
+                >
+                  <nz-option
+                    *ngFor="let btypes of kpi_btypes"
+                    [nzLabel]="btypes.kpi_btype"
+                    [nzValue]="btypes.kpi_btype"
+                  ></nz-option>
+                </nz-select>
+              </div>
+
+              <div class="form-group">
+                <label for="username">Financial Year</label>
+                <nz-select
+                  nzMode="multiple"
+                  [(ngModel)]="kpi_fin_year"
+                  (focus)="handleValidation('kpi_fin_year')"
+                  (mouseenter)="handleValidation('kpi_fin_year')"
+                  (ngModelChange)="handleValidation('kpi_fin_year')"
+                  [ngClass]="{ error: hasFieldErrorExits('kpi_fin_year') }"
+                >
+                  <nz-option
+                    *ngFor="let finyear of kpi_finyear_list"
+                    [nzLabel]="finyear.fin_year"
+                    [nzValue]="finyear.fin_year"
+                  ></nz-option>
+                </nz-select>
+              </div>
+
+              <div class="form-group">
+                <label for="username">KPI Product</label>
+                <nz-select
+                  nzMode="multiple"
+                  [(ngModel)]="kpi_product"
+                  (focus)="handleValidation('kpi_product')"
+                  (mouseenter)="handleValidation('kpi_product')"
+                  (ngModelChange)="handleValidation('kpi_product')"
+                  [ngClass]="{ error: hasFieldErrorExits('kpi_product') }"
+                  disabled="true"
+                >
+                  <nz-option
+                    *ngFor="let product of productcode"
+                    [nzLabel]="product.product"
+                    [nzValue]="product.product"
+                  ></nz-option>
+                </nz-select>
+              </div>
+
+              <div class="form-group">
+                <label for="username">KPI sub-Products</label>
+                <nz-select
+                  nzMode="multiple"
+                  [(ngModel)]="kpi_sub_product"
+                  (focus)="handleValidation('kpi_sub_product')"
+                  (mouseenter)="handleValidation('kpi_sub_product')"
+                  (ngModelChange)="handleValidation('kpi_sub_product')"
+                  [ngClass]="{ error: hasFieldErrorExits('kpi_sub_product') }"
+                >
+                  <nz-option
+                    *ngFor="let sub_product of kpi_subproducts"
+                    [nzLabel]="sub_product.sub_product"
+                    [nzValue]="sub_product.sub_product"
+                  ></nz-option>
+                </nz-select>
+              </div>
+
+              <div class="form-group">
+                <label for="username">KPI Channel</label>
+                <nz-select
+                  nzMode="multiple"
+                  [(ngModel)]="kpi_channel"
+                  (focus)="handleValidation('kpi_channel')"
+                  (mouseenter)="handleValidation('kpi_channel')"
+                  (ngModelChange)="handleValidation('kpi_channel')"
+                  [ngClass]="{ error: hasFieldErrorExits('kpi_channel') }"
+                  disabled="true"
+                >
+                  <nz-option
+                    *ngFor="let channel of channelcode"
+                    [nzLabel]="channel.channel_list"
+                    [nzValue]="channel.channel_list"
+                  ></nz-option>
+                </nz-select>
+              </div>
+
+              <div class="form-group">
+                <label for="username">KPI sub channel</label>
+                <nz-select
+                  nzMode="multiple"
+                  [(ngModel)]="kpi_sub_channel"
+                  (focus)="handleValidation('kpi_sub_channel')"
+                  (mouseenter)="handleValidation('kpi_sub_channel')"
+                  (ngModelChange)="handleValidation('kpi_sub_channel')"
+                  [ngClass]="{ error: hasFieldErrorExits('kpi_sub_channel') }"
+                  disabled="true"
+                >
+                  <nz-option
+                    *ngFor="let channel of subchannel"
+                    [nzLabel]="channel.sub_channel_list"
+                    [nzValue]="channel.sub_channel_list"
+                  ></nz-option>
+                </nz-select>
+              </div>
+
+              <div class="form-group">
+                <label for="username">KPI Branch name</label>
+                <nz-select
+                  nzMode="multiple"
+                  [(ngModel)]="kpi_branch_name"
+                  (focus)="handleValidation('kpi_branch_name')"
+                  (mouseenter)="handleValidation('kpi_branch_name')"
+                  (ngModelChange)="handleValidation('kpi_branch_name')"
+                  [ngClass]="{ error: hasFieldErrorExits('kpi_branch_name') }"
+                  disabled="true"
+                >
+                  <nz-option
+                    *ngFor="let branch of branchname"
+                    [nzLabel]="branch.branch_name"
+                    [nzValue]="branch.branch_name"
+                  ></nz-option>
+                </nz-select>
+              </div>
+
+              <div class="form-group">
+                <label for="username">KPI Add-on</label>
+                <nz-select
+                  nzMode="multiple"
+                  [(ngModel)]="kpi_add_on"
+                  (focus)="handleValidation('kpi_add_on')"
+                  (mouseenter)="handleValidation('kpi_add_on')"
+                  (ngModelChange)="handleValidation('kpi_add_on')"
+                  [ngClass]="{ error: hasFieldErrorExits('kpi_add_on') }"
+                  disabled="true"
+                >
+                  <nz-option
+                    *ngFor="let addon of addonList"
+                    [nzLabel]="addon.addon"
+                    [nzValue]="addon.addon"
+                  ></nz-option>
+                </nz-select>
+              </div>
+
+              <div>
+                <button
+                  type="button"
+                  (click)="handleSave()"
+                  class="subscribe btn btn-primary btn-block rounded shadow-sm mt-5 w-25 float-end ms-5 submit"
+                >
+                  SAVE
+                </button>
+
+                <button
+                  type="button"
+                  (click)="handleNav('detail')"
+                  class="subscribe btn btn-primary btn-block rounded shadow-sm mt-5 w-25 float-end back"
+                >
+                  BACK
+                </button>
+              </div>
+            </div>
+          </div>
+          <!-- End -->
+        </div>
+        <!-- End -->
+      </div>
+    </div>
+  </div>
+</main>
+<!--Main layout-->

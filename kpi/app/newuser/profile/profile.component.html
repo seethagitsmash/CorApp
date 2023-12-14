@@ -1,0 +1,257 @@
+<!--Main Navigation-->
+<header>
+  <!-- Sidebar -->
+  <nav id="sidebarMenu" class="collapse d-lg-block sidebar collapse bg-white">
+    <div class="position-sticky">
+      <div class="list-group list-group-flush mx-3 mt-4">
+        <a
+          (click)="handleNav('dashboard')"
+          class="list-group-item list-group-item-action py-2 ripple"
+        >
+          <i class="fas fa-lock fa-fw me-3"></i><span>Dashboard</span>
+        </a>
+        <a
+          (click)="handleNav('profile')"
+          class="list-group-item list-group-item-action py-2 ripple active"
+          ><i class="fas fa-lock fa-fw me-3"></i><span>New User</span></a
+        >
+        <a
+          (click)="handleNav('edit')"
+          class="list-group-item list-group-item-action py-2 ripple"
+          ><i class="fas fa-lock fa-fw me-3"></i><span>Edit User</span></a
+        >
+      </div>
+    </div>
+  </nav>
+  <!-- Sidebar -->
+
+  <!-- Navbar -->
+  <nav
+    id="main-navbar"
+    class="navbar navbar-expand-lg navbar-light bg-white fixed-top"
+  >
+    <!-- Container wrapper -->
+    <div class="container-fluid">
+      <!-- Toggle button -->
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-mdb-toggle="collapse"
+        data-mdb-target="#sidebarMenu"
+        aria-controls="sidebarMenu"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <i class="fas fa-bars"></i>
+      </button>
+
+      <!-- Brand -->
+      <a class="navbar-brand">
+        <img src="/assets/rs.png" height="40" alt="MDB Logo" loading="lazy" />
+      </a>
+
+      <!-- Right links -->
+      <ul class="navbar-nav ms-auto d-flex flex-row">
+        <!-- Avatar -->
+        <li class="nav-item dropdown">
+          <a
+            class="nav-link hidden-arrow d-flex align-items-center"
+            (click)="handleNav('')"
+            id="navbarDropdownMenuLink"
+            role="button"
+            aria-expanded="false"
+          >
+            Logout
+          </a>
+        </li>
+      </ul>
+    </div>
+    <!-- Container wrapper -->
+  </nav>
+  <!-- Navbar -->
+</header>
+<!--Main Navigation-->
+
+<!--Main layout-->
+<main style="margin-top: 58px">
+  <div class="container">
+    <div class="row mb-4">
+      <div class="col-lg-8 mx-auto text-center">
+        <h3 class="fw-bold">Create a new user | Profile detail</h3>
+      </div>
+    </div>
+
+    <div class="mx-auto">
+      <div class="bg-white rounded-lg shadow p-5">
+        <!-- Credit card form content -->
+        <div class="tab-content">
+          <!-- credit card info-->
+          <div id="nav-tab-card" class="tab-pane fade show active">
+            <!-- <p class="alert alert-success">Some text success or error</p> -->
+
+            <div class="row container">
+              <div class="form-group">
+                <label for="username">Employee ID</label>
+                <input
+                  type="text"
+                  [disabled]="isSaved"
+                  placeholder="Employee Id"
+                  class="form-control"
+                  [(ngModel)]="employee_id"
+                  (focus)="handleValidation('employee_id')"
+                  (mouseenter)="handleValidation('employee_id')"
+                  (ngModelChange)="handleValidation('employee_id')"
+                  [ngClass]="{
+                    error:
+                      hasFieldErrorExits('employee_id') ||
+                      employeeServiceError !== ''
+                  }"
+                />
+                <span style="color: #ff0000">{{ employeeServiceError }}</span>
+              </div>
+
+              <div class="form-group">
+                <label for="username">Username</label>
+                <input
+                  type="text"
+                  [disabled]="isSaved"
+                  placeholder="Username"
+                  class="form-control"
+                  [(ngModel)]="username"
+                  (focus)="handleValidation('username')"
+                  (mouseenter)="handleValidation('username')"
+                  (ngModelChange)="handleValidation('username')"
+                  [ngClass]="{
+                    error:
+                      hasFieldErrorExits('username') ||
+                      usernameServiceError !== ''
+                  }"
+                />
+                <span style="color: #ff0000">{{ usernameServiceError }}</span>
+              </div>
+
+              <div class="form-group">
+                <label for="username">First Name</label>
+                <input
+                  type="text"
+                  [disabled]="isSaved"
+                  placeholder="First Name"
+                  class="form-control"
+                  [(ngModel)]="first_name"
+                  (focus)="handleValidation('first_name')"
+                  (mouseenter)="handleValidation('first_name')"
+                  (ngModelChange)="handleValidation('first_name')"
+                  [ngClass]="{ error: hasFieldErrorExits('first_name') }"
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="username">Last Name</label>
+                <input
+                  type="text"
+                  [disabled]="isSaved"
+                  placeholder="Last Name"
+                  class="form-control"
+                  [(ngModel)]="last_name"
+                  (ngModelChange)="handleValidation('last_name')"
+                  [ngClass]="{ error: hasFieldErrorExits('last_name') }"
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="username">Email ID</label>
+                <input
+                  type="text"
+                  [disabled]="isSaved"
+                  placeholder="Email Id"
+                  class="form-control"
+                  [(ngModel)]="email_id"
+                  (focus)="handleValidation('email_id')"
+                  (mouseenter)="handleValidation('email_id')"
+                  (ngModelChange)="handleValidation('email_id')"
+                  [ngClass]="{
+                    error:
+                      hasFieldErrorExits('email_id') || emailServiceError !== ''
+                  }"
+                />
+                <span style="color: #ff0000">{{ emailServiceError }}</span>
+              </div>
+
+              <div class="form-group">
+                <label for="username">Mobile</label>
+                <input
+                  type="number"
+                  [disabled]="isSaved"
+                  placeholder="Mobile"
+                  class="form-control"
+                  [(ngModel)]="mobile"
+                  (focus)="handleValidation('mobile')"
+                  (mouseenter)="handleValidation('mobile')"
+                  (ngModelChange)="handleValidation('mobile')"
+                  [ngClass]="{
+                    error:
+                      hasFieldErrorExits('mobile') || mobileServiceError !== ''
+                  }"
+                />
+                <span style="color: #ff0000">{{ mobileServiceError }}</span>
+              </div>
+
+              <div class="form-group">
+                <label for="username">Password</label>
+                <input
+                  type="text"
+                  [disabled]="isSaved"
+                  class="form-control"
+                  placeholder="Password"
+                  [(ngModel)]="password"
+                  (focus)="handleValidation('password')"
+                  (mouseenter)="handleValidation('password')"
+                  (ngModelChange)="handleValidation('password')"
+                  [ngClass]="{ error: hasFieldErrorExits('password') }"
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="username">Capacity</label>
+                <input
+                  type="number"
+                  [disabled]="isSaved"
+                  placeholder="Password"
+                  class="form-control"
+                  [(ngModel)]="capacity"
+                  (focus)="handleValidation('capacity')"
+                  (mouseenter)="handleValidation('capacity')"
+                  (ngModelChange)="handleValidation('capacity')"
+                  [ngClass]="{ error: hasFieldErrorExits('capacity') }"
+                />
+              </div>
+
+              <div>
+                <button
+                  *ngIf="isSaved"
+                  type="button"
+                  (click)="handleNav('detail')"
+                  class="subscribe btn btn-primary btn-block rounded shadow-sm mt-5 w-25 float-end ms-5 submit"
+                >
+                  NEXT
+                </button>
+
+                <button
+                  *ngIf="!isSaved"
+                  type="button"
+                  (click)="handleSubmit()"
+                  class="subscribe btn btn-primary btn-block rounded shadow-sm mt-4 w-25 float-end submit"
+                >
+                  SAVE & NEXT
+                </button>
+              </div>
+            </div>
+          </div>
+          <!-- End -->
+        </div>
+        <!-- End -->
+      </div>
+    </div>
+  </div>
+</main>
+<!--Main layout-->

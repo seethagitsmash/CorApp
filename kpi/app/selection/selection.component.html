@@ -1,0 +1,112 @@
+<!--Main Navigation-->
+<header>
+  <!-- Sidebar -->
+  <nav id="sidebarMenu" class="collapse d-lg-block sidebar collapse bg-white">
+    <div class="position-sticky">
+      <div class="list-group list-group-flush mx-3 mt-4">
+        <a
+          (click)="handleNav('dashboard')"
+          class="list-group-item list-group-item-action py-2 ripple active"
+        >
+          <i class="fas fa-lock fa-fw me-3"></i><span>Dashboard</span>
+        </a>
+        <a
+          (click)="handleNav('profile')"
+          class="list-group-item list-group-item-action py-2 ripple"
+          ><i class="fas fa-lock fa-fw me-3"></i><span>New User</span></a
+        >
+        <a
+          (click)="handleNav('edit')"
+          class="list-group-item list-group-item-action py-2 ripple"
+          ><i class="fas fa-lock fa-fw me-3"></i><span>Edit User</span></a
+        >
+      </div>
+    </div>
+  </nav>
+  <!-- Sidebar -->
+
+  <!-- Navbar -->
+  <nav
+    id="main-navbar"
+    class="navbar navbar-expand-lg navbar-light bg-white fixed-top"
+  >
+    <!-- Container wrapper -->
+    <div class="container-fluid">
+      <!-- Toggle button -->
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-mdb-toggle="collapse"
+        data-mdb-target="#sidebarMenu"
+        aria-controls="sidebarMenu"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <i class="fas fa-bars"></i>
+      </button>
+
+      <!-- Brand -->
+      <a class="navbar-brand">
+        <img src="/assets/rs.png" height="40" alt="MDB Logo" loading="lazy" />
+      </a>
+
+      <!-- Right links -->
+      <ul class="navbar-nav ms-auto d-flex flex-row">
+        <!-- Avatar -->
+        <li class="nav-item dropdown">
+          <a
+            class="nav-link hidden-arrow d-flex align-items-center"
+            (click)="handleNav('')"
+            id="navbarDropdownMenuLink"
+            role="button"
+            aria-expanded="false"
+          >
+            Logout
+          </a>
+        </li>
+      </ul>
+    </div>
+    <!-- Container wrapper -->
+  </nav>
+  <!-- Navbar -->
+</header>
+<!--Main Navigation-->
+
+<!--Main layout-->
+<main style="margin-top: 58px">
+  <div class="container pt-4">
+    <div class="row">
+      <div
+        class="col-md-4 col-xl-3"
+        (click)="handleNav('edit')"
+        style="cursor: pointer"
+      >
+        <div class="card bg-c-blue order-card">
+          <div class="card-block">
+            <h6 class="m-b-20">Total Users</h6>
+            <h2 class="text-right">
+              <i class="fa fa-cart-plus f-left"></i><span>{{ userCount }}</span>
+            </h2>
+            <!-- <p class="m-b-0">KPI users<span class="f-right">351</span></p> -->
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4 col-xl-3">
+        <div class="card bg-c-green order-card">
+          <div class="card-block">
+            <h6 class="m-b-20">Active users</h6>
+            <h2 class="text-right">
+              <i class="fa fa-rocket f-left"></i
+              ><span>{{ activeUserCount }}</span>
+            </h2>
+            <!-- <p class="m-b-0">
+              Completed Orders<span class="f-right">351</span>
+            </p> -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+<!--Main layout-->

@@ -1,0 +1,313 @@
+<!--Main Navigation-->
+<header>
+  <!-- Sidebar -->
+  <nav id="sidebarMenu" class="collapse d-lg-block sidebar collapse bg-white">
+    <div class="position-sticky">
+      <div class="list-group list-group-flush mx-3 mt-4">
+        <a
+          (click)="handleNav('dashboard')"
+          class="list-group-item list-group-item-action py-2 ripple"
+        >
+          <i class="fas fa-lock fa-fw me-3"></i><span>Dashboard</span>
+        </a>
+        <a
+          (click)="handleNav('profile')"
+          class="list-group-item list-group-item-action py-2 ripple"
+          ><i class="fas fa-lock fa-fw me-3"></i><span>New User</span></a
+        >
+        <a
+          (click)="handleNav('edit')"
+          class="list-group-item list-group-item-action py-2 ripple active"
+          ><i class="fas fa-lock fa-fw me-3"></i><span>Edit User</span></a
+        >
+      </div>
+    </div>
+  </nav>
+  <!-- Sidebar -->
+
+  <!-- Navbar -->
+  <nav
+    id="main-navbar"
+    class="navbar navbar-expand-lg navbar-light bg-white fixed-top"
+  >
+    <!-- Container wrapper -->
+    <div class="container-fluid">
+      <!-- Toggle button -->
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-mdb-toggle="collapse"
+        data-mdb-target="#sidebarMenu"
+        aria-controls="sidebarMenu"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <i class="fas fa-bars"></i>
+      </button>
+
+      <!-- Brand -->
+      <a class="navbar-brand">
+        <img src="/assets/rs.png" height="40" alt="MDB Logo" loading="lazy" />
+      </a>
+      <!-- Search form -->
+      <!-- <form class="d-none d-md-flex input-group w-auto my-auto">
+          <input
+            autocomplete="off"
+            type="search"
+            class="form-control rounded"
+            placeholder='Search (ctrl + "/" to focus)'
+            style="min-width: 225px"
+          />
+          <span class="input-group-text border-0"
+            ><i class="fas fa-search"></i
+          ></span>
+        </form> -->
+
+      <!-- Right links -->
+      <ul class="navbar-nav ms-auto d-flex flex-row">
+        <!-- Avatar -->
+        <li class="nav-item dropdown">
+          <a
+            class="nav-link hidden-arrow d-flex align-items-center"
+            (click)="handleNav('')"
+            id="navbarDropdownMenuLink"
+            role="button"
+            aria-expanded="false"
+          >
+            Logout
+          </a>
+        </li>
+      </ul>
+    </div>
+    <!-- Container wrapper -->
+  </nav>
+  <!-- Navbar -->
+</header>
+<!--Main Navigation-->
+
+<!--Main layout-->
+<main style="margin-top: 58px">
+  <div class="container">
+    <div class="row mb-4">
+      <div class="col-lg-8 mx-auto text-center">
+        <h3 class="fw-bold">Edit user information</h3>
+      </div>
+    </div>
+
+    <div class="mx-auto">
+      <div class="bg-white rounded-lg shadow p-5">
+        <!-- Credit card form content -->
+        <div class="tab-content">
+          <!-- credit card info-->
+          <div id="nav-tab-card" class="tab-pane fade show active">
+            <!-- <p class="alert alert-success">Some text success or error</p> -->
+
+            <div class="row container">
+              <div class="form-group">
+                <label for="username">Username</label>
+                <input
+                  type="text"
+                  name="username"
+                  placeholder="Username"
+                  required
+                  disabled
+                  class="form-control"
+                  [value]="username"
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="username">KPI B-Type</label>
+                <select
+                  class="form-select"
+                  aria-label="Default select example"
+                  [(ngModel)]="kpi_btype"
+                >
+                  <option selected>Select...</option>
+                  <option value="1">Admin</option>
+                  <option value="2">Manager</option>
+                  <option value="3">Executive</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="username">KPI Zone</label>
+                <select
+                  class="form-select"
+                  aria-label="Default select example"
+                  [(ngModel)]="kpi_zone"
+                >
+                  <option selected>Select...</option>
+                  <option value="1">Admin</option>
+                  <option value="2">Manager</option>
+                  <option value="3">Executive</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="username">KPI Product</label>
+                <select
+                  class="form-select"
+                  aria-label="Default select example"
+                  [(ngModel)]="kpi_product"
+                >
+                  <option selected>Select...</option>
+                  <option value="1">Admin</option>
+                  <option value="2">Manager</option>
+                  <option value="3">Executive</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="username">KPI sub-Products</label>
+                <select
+                  class="form-select"
+                  aria-label="Default select example"
+                  [(ngModel)]="kpi_sub_product"
+                >
+                  <option selected>Select...</option>
+                  <option value="1">Admin</option>
+                  <option value="2">Manager</option>
+                  <option value="3">Executive</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="username">KPI Branch code</label>
+                <select
+                  class="form-select"
+                  aria-label="Default select example"
+                  [(ngModel)]="kpi_branch_code"
+                >
+                  <option selected>Select...</option>
+                  <option value="1">Admin</option>
+                  <option value="2">Manager</option>
+                  <option value="3">Executive</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="username">Fin Year</label>
+                <select
+                  class="form-select"
+                  aria-label="Default select example"
+                  [(ngModel)]="kpi_fin_year"
+                >
+                  <option selected>Select...</option>
+                  <option value="1">Admin</option>
+                  <option value="2">Manager</option>
+                  <option value="3">Executive</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="username">KPI Channel</label>
+                <select
+                  class="form-select"
+                  aria-label="Default select example"
+                  [(ngModel)]="kpi_channel"
+                >
+                  <option selected>Select...</option>
+                  <option value="1">Admin</option>
+                  <option value="2">Manager</option>
+                  <option value="3">Executive</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="username">KPI sub channel</label>
+                <select
+                  class="form-select"
+                  aria-label="Default select example"
+                  [(ngModel)]="kpi_sub_channel"
+                >
+                  <option selected>Select...</option>
+                  <option value="1">Admin</option>
+                  <option value="2">Manager</option>
+                  <option value="3">Executive</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="username">KPI State</label>
+                <select
+                  class="form-select"
+                  aria-label="Default select example"
+                  [(ngModel)]="kpi_state"
+                >
+                  <option selected>Select...</option>
+                  <option value="1">Admin</option>
+                  <option value="2">Manager</option>
+                  <option value="3">Executive</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="username">KPI city</label>
+                <select
+                  class="form-select"
+                  aria-label="Default select example"
+                  [(ngModel)]="kpi_city"
+                >
+                  <option selected>Select...</option>
+                  <option value="1">Admin</option>
+                  <option value="2">Manager</option>
+                  <option value="3">Executive</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="username">KPI Cluster</label>
+                <select
+                  class="form-select"
+                  aria-label="Default select example"
+                  [(ngModel)]="kpi_cluster"
+                >
+                  <option selected>Select...</option>
+                  <option value="1">Admin</option>
+                  <option value="2">Manager</option>
+                  <option value="3">Executive</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="username">Add-on</label>
+                <select
+                  class="form-select"
+                  aria-label="Default select example"
+                  [(ngModel)]="kpi_add_on"
+                >
+                  <option selected>Select...</option>
+                  <option value="1">Admin</option>
+                  <option value="2">Manager</option>
+                  <option value="3">Executive</option>
+                </select>
+              </div>
+
+              <div>
+                <button
+                  type="button"
+                  (click)="handleButton('save')"
+                  class="subscribe btn btn-primary btn-block rounded shadow-sm mt-5 w-25 ms-5 float-end submit"
+                >
+                  UPDATE USER
+                </button>
+
+                <button
+                  type="button"
+                  (click)="handleButton('cancel')"
+                  class="subscribe btn btn-primary btn-block rounded shadow-sm mt-5 w-25 float-end back"
+                >
+                  CANCEL
+                </button>
+              </div>
+            </div>
+          </div>
+          <!-- End -->
+        </div>
+        <!-- End -->
+      </div>
+    </div>
+  </div>
+</main>
+<!--Main layout-->
