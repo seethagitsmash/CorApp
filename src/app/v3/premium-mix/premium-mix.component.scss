@@ -50,13 +50,21 @@
   }
 
   .next {
-    right: 5%;
+    right: 6%;
     position: fixed;
   }
 }
 
+.w_70 {
+  width: 70%;
+}
+
+.w_30 {
+  width: 30%;
+}
+
 .d_row {
-  padding: 106px 250px;
+  padding: 106px 50px;
 
   .col {
     width: 0;
@@ -87,5 +95,20 @@
       text-align: center;
       outline: 1px dotted #000000;
     }
+  }
+}
+
+.ant-message-notice-content {
+  background: #ff000085;
+  color: white;
+  background-color: #ff000085;
+}
+
+.ant-message-custom-content {
+  font-size: 22px;
+
+  svg {
+    color: #ffffff;
+    margin-bottom: 9px;
   }
 }

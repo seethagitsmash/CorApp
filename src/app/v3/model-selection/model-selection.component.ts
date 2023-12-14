@@ -102,14 +102,55 @@ export class ModelSelectionComponent {
     };
 
     this.apiService.getModel(body).subscribe((data: any) => {
+      // fuelList
+
+      const a = Object.keys(data.fuelModelList);
+
+      a.map((e: any) => {
+        if (data.fuelModelList[e].length) {
+          this.fuelList.push({
+            name: e,
+            id: this.fuelList.length + 1,
+          });
+        }
+      });
+
       this.modelDieselList = data.fuelModelList.Diesel;
-      this.modelPetrolList = data.fuelModelList.Others;
-      this.modelElectricList = data.fuelModelList.Others;
-      this.modelAllList = [
+      this.modelPetrolList = data.fuelModelList.Petrol;
+      this.modelElectricList = data.fuelModelList.Electric;
+      this.modelInbuiltList = data.fuelModelList.Inbuilt;
+      const allModel = [
         ...data.fuelModelList.Diesel,
-        ...data.fuelModelList.Others,
+        ...data.fuelModelList.Petrol,
+        ...data.fuelModelList.Electric,
+        ...data.fuelModelList.Inbuilt,
       ];
+      this.modelAllList = allModel;
+
+      this.handleMakeChange(allModel);
     });
+  }
+
+  // After user save this record - Gone back - change make - comes back - reset the model and all selection
+  handleMakeChange(allModel: any): void {
+    const isPreviousModelExits = allModel.find(
+      (e: any) => e.model === this.rowLists[0].model
+    );
+
+    if (isPreviousModelExits === undefined) {
+      this.rowLists = [
+        {
+          id: 1,
+          ref_id: 1,
+          fuel: '',
+          fuel_id: 0,
+          model: '',
+          model_code: '',
+          new_gwp: 0,
+          old_gwp: 0,
+        },
+      ];
+    }
   }
 
   errorList: any = [];
@@ -129,24 +170,12 @@ export class ModelSelectionComponent {
     },
   ];
   make: string = '';
-  fuelList: any = [
-    {
-      name: 'Diesel',
-      id: 1,
-    },
-    {
-      name: 'Petrol',
-      id: 2,
-    },
-    {
-      name: 'Electric',
-      id: 3,
-    },
-  ];
+  fuelList: any = [];
   modelAllList: modelStrct[] = [];
   modelDieselList: modelStrct[] = [];
   modelPetrolList: modelStrct[] = [];
   modelElectricList: modelStrct[] = [];
+  modelInbuiltList: modelStrct[] = [];
   isModalVisible = false;
   modalTitle: string = 'Summary of Model wise expected GWP';
   sessData: any = '';
@@ -158,7 +187,6 @@ export class ModelSelectionComponent {
 
   handleModalVisible(): void {
     this.isLoading = true;
-    console.log(this.rowLists, 'pppppppp');
     this.errorList = [];
     this.new_car_total = 0;
     this.old_car_total = 0;
@@ -181,6 +209,7 @@ export class ModelSelectionComponent {
       return;
     }
 
+    this.isLoading = false;
     this.car_total = this.new_car_total + this.old_car_total;
     this.isModalVisible = !this.isModalVisible;
   }
@@ -202,14 +231,11 @@ export class ModelSelectionComponent {
         });
         hasError = true;
       }
-      if (+e.new_gwp === 0) {
+      if (+e.new_gwp === 0 && +e.old_gwp === 0) {
         this.errorList.push({
           index: i,
           field: 'new',
         });
-        hasError = true;
-      }
-      if (+e.old_gwp === 0) {
         this.errorList.push({
           index: i,
           field: 'old',
@@ -236,13 +262,15 @@ export class ModelSelectionComponent {
 
   checkModelDuplication(): boolean {
     let hasError: any = [];
+
     var valueArr = this.rowLists.map(function (item, i) {
       hasError.push({
         index: i,
         field: 'model',
       });
-      return item.model;
+      return item.fuel + item.model;
     });
+
     var isDuplicate = valueArr.some(function (item, idx) {
       if (valueArr.indexOf(item) != idx) {
         hasError.push({
@@ -287,6 +315,7 @@ export class ModelSelectionComponent {
 
   handleSaveModel(): void {
     this.handleSession();
+    const user = sessionStorage.getItem('user');
 
     let body = {
       city: this.sessData.city,
@@ -294,10 +323,10 @@ export class ModelSelectionComponent {
       id: 0,
       make: this.sessData.make,
       state: this.sessData.state,
-      total_New_Car_GWP: this.sessData.new_car_total,
-      total_Old_Car_GWP: this.sessData.old_car_total,
-      tranId: this.sessData.tranId,
-      userName: sessionStorage.getItem('user'),
+      total_New_Car_GWP: this.new_car_total,
+      total_Old_Car_GWP: this.old_car_total,
+      tranId: this.sessData.tranId ? this.sessData.tranId : 0,
+      userName: user,
       gwpSummaryDtls: [{}],
     };
 
@@ -310,19 +339,19 @@ export class ModelSelectionComponent {
 
     this.rowLists.map((e: any) => {
       let a = {
-        // city: 'string',
-        // city_Code: 'string',
-        // createdBy: 'string',
-        // createdDate: '2023-11-06T07:23:24.158Z',
+        // city: this.sessData.city,
+        // city_Code: this.sessData.cityCode,
+        // createdBy: user,
+        // createdDate: new Date(),
         fuelType: e.fuel,
-        gwp_New_Car: e.new_gwp,
-        gwp_Old_Car: e.old_gwp,
+        gwp_New_Car: e.new_gwp !== null ? e.new_gwp : 0,
+        gwp_Old_Car: e.old_gwp !== null ? e.old_gwp : 0,
         // id: 0,
-        // make: e.make,
+        // make: this.sessData.make,
         model: e.model,
-        // state: e.state,
+        // state: this.sessData.state,
         // summaryModel_Gwp_Id: 0,
-        // tranId: e.,
+        // tranId: this.sessData.tranId ? this.sessData.tranId : 0,
       };
 
       if (e.fuel === 'Diesel') {

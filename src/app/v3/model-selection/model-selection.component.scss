@@ -127,7 +127,7 @@
 
 ::ng-deep {
   .ant-modal {
-    width: 750px !important;
+    width: 66em !important;
 
     .ant-modal-header {
       text-align: center;
@@ -138,14 +138,16 @@
       .sno {
         width: 1% !important;
       }
+      .w_mdl {
+        width: 20% !important;
+      }
+      .list {
+        width: 10% !important;
+      }
 
       tr {
         border: 1px solid #d7d5d7;
         text-align: center !important;
-      }
-
-      .list {
-        width: 15% !important;
       }
     }
 
@@ -167,6 +169,21 @@
       background-color: rgb(0, 32, 96);
     }
   }
+
+  .ant-message-notice-content {
+    background: #ff000085;
+    color: white;
+    background-color: #ff000085;
+  }
+
+  .ant-message-custom-content {
+    font-size: 22px;
+
+    svg {
+      color: #ffffff;
+      margin-bottom: 9px;
+    }
+  }
 }
 
 .footer {
@@ -186,7 +203,7 @@
   }
 
   .next {
-    right: 5%;
+    right: 6%;
     position: fixed;
   }
 }

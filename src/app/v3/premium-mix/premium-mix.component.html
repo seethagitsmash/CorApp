@@ -32,8 +32,8 @@
     <div class="border_div">
       <div class="header">Premium Business Mix</div>
 
-      <div class="body">
-        <div class="row d_row">
+      <div class="body d-flex">
+        <div class="row d_row w_70">
           <div class="col">
             <label>New Car</label>
             <br />
@@ -71,6 +71,10 @@
               [value]="total_gwp"
             />
           </div>
+        </div>
+
+        <div class="w_30" *ngIf="gwpForPieChart.length">
+          <app-piechart [gwpValue]="gwpForPieChart"></app-piechart>
         </div>
       </div>
 

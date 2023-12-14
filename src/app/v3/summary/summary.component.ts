@@ -62,18 +62,18 @@ export class SummaryComponent {
   gwp_total: number = 0;
   old_gwp_od: number = 0;
   old_gwp_tp_1y: number = 0;
-  old_gwp_tp_3y: string = 'N/A';
+  old_gwp_tp_3y: string = '--';
   old_gwp_total: number = 0;
 
   // Commission
   com_total: number = 0;
   com_od: number = 0;
-  com_tp_1y: string = 'N/A';
-  com_tp_3y: string = 'N/A';
+  com_tp_1y: string = '--';
+  com_tp_3y: string = '--';
   old_com_total: number = 0;
   old_com_od: number = 0;
   old_com_tp_1y: number = 0;
-  old_com_tp_3y: string = 'N/A';
+  old_com_tp_3y: string = '--';
 
   // Fuel Type
   diesel: number = 0;
@@ -92,10 +92,15 @@ export class SummaryComponent {
   old_above_thou_five: number = 0;
 
   // ncb
+  ncb: string = '--';
+  non_ncb: number = 0;
   old_ncb: number = 0;
   old_non_ncb: number = 0;
 
   // vehicle age
+  four: number = 0;
+  ten: string = '--';
+  above_ten: string = '--';
   old_four: number = 0;
   old_ten: number = 0;
   old_above_ten: number = 0;
@@ -116,6 +121,57 @@ export class SummaryComponent {
   currentMonth: number = 0;
   isSpinning: boolean = false;
   isLoading: boolean = false;
+
+  monthList: any = [
+    {
+      name: 'Jan',
+      value: 1,
+    },
+    {
+      name: 'Feb',
+      value: 2,
+    },
+    {
+      name: 'Mar',
+      value: 3,
+    },
+    {
+      name: 'Apr',
+      value: 4,
+    },
+    {
+      name: 'May',
+      value: 5,
+    },
+    {
+      name: 'Jun',
+      value: 6,
+    },
+    {
+      name: 'Jul',
+      value: 7,
+    },
+    {
+      name: 'Aug',
+      value: 8,
+    },
+    {
+      name: 'Sep',
+      value: 9,
+    },
+    {
+      name: 'Oct',
+      value: 10,
+    },
+    {
+      name: 'Nov',
+      value: 11,
+    },
+    {
+      name: 'Dec',
+      value: 12,
+    },
+  ];
 
   handleSession(): void {
     let cor = sessionStorage.getItem('cor');
@@ -140,26 +196,31 @@ export class SummaryComponent {
     } else {
       let a = JSON.parse(cor);
       this.sessData = a;
+      const gwpTotal = +a.gwp_od + +a.gwp_tp_1y + +a.gwp_tp_3y;
 
       // GWP
       this.gwp_od = a.gwp_od;
-      // this.gwp_tp_1y = a.
-      // this.gwp_tp_3y = a.
-      // this.gwp_total = a.
+      this.gwp_tp_1y = a.gwp_tp_1y;
+      this.gwp_tp_3y = a.gwp_tp_3y;
+      this.gwp_total = gwpTotal;
+
       this.old_gwp_od = a.old_gwp_od;
-      this.old_gwp_tp_1y = a.old_gwp_tp;
-      this.old_gwp_tp_3y = 'N/A';
-      this.old_gwp_total = a.old_gwp_od + a.old_gwp_tp;
+      this.old_gwp_tp_1y = a.old_gwp_tp_1y;
+      this.old_gwp_tp_3y = '--';
+      this.old_gwp_total = +a.old_gwp_od + +a.old_gwp_tp_1y;
 
       // Commission
-      this.com_total = a.com_od;
-      this.com_od = a.com_od;
-      this.com_tp_1y = 'N/A';
-      this.com_tp_3y = 'N/A';
-      this.old_com_total = a.old_com_od + a.old_com_tp;
-      this.old_com_od = a.old_com_od;
-      this.old_com_tp_1y = a.old_com_tp;
-      this.old_com_tp_3y = 'N/A';
+      this.com_od = (+a.gwp_od * +a.com_od) / 100;
+      this.com_tp_1y = '--';
+      this.com_tp_3y = '--';
+      this.com_total = (+a.gwp_od * +a.com_od) / 100;
+
+      this.old_com_od = (+a.old_gwp_od * +a.old_com_od) / 100;
+      this.old_com_tp_1y = (+a.old_gwp_tp_1y * +a.old_com_tp) / 100;
+      this.old_com_tp_3y = '--';
+      this.old_com_total =
+        (+a.old_gwp_od * +a.old_com_od) / 100 +
+        (+a.old_gwp_tp_1y * +a.old_com_tp) / 100;
 
       // // Fuel Type
       this.diesel = a.diesel_total;
@@ -170,21 +231,23 @@ export class SummaryComponent {
       this.old_electric = a.old_electric_total;
 
       // // cc
-      // this.thou = a.
-      // this.thou_five = a.
-      // this.above_thou_five = a.
-      // this.old_thou = a.
-      // this.old_thou_five = a.
-      // this.old_above_thou_five = a.
+      this.thou = a.thou;
+      this.thou_five = a.thou_five;
+      this.above_thou_five = a.above_thou_five;
+      this.old_thou = a.old_thou;
+      this.old_thou_five = a.old_thou_five;
+      this.old_above_thou_five = a.old_above_thou_five;
 
       // ncb
-      this.old_ncb = a.old_ncb;
-      this.old_non_ncb = a.old_non_ncb;
+      this.non_ncb = gwpTotal;
+      this.old_ncb = a.old_ncb !== null ? a.old_ncb : 0;
+      this.old_non_ncb = a.old_non_ncb !== null ? a.old_non_ncb : 0;
 
       // vehicle age
-      this.old_four = a.old_four;
-      this.old_ten = a.old_ten;
-      this.old_above_ten = a.old_above_ten;
+      this.four = gwpTotal;
+      this.old_four = a.old_four !== null ? a.old_four : 0;
+      this.old_ten = a.old_ten !== null ? a.old_ten : 0;
+      this.old_above_ten = a.old_above_ten !== null ? a.old_above_ten : 0;
 
       // Dealer
       if ('year' in a) {
@@ -230,15 +293,16 @@ export class SummaryComponent {
           carType: 'New Car',
           tranId: this.sessData.tranId,
 
-          gwpTotal: this.gwp_total,
-          gwpOd: this.gwp_od,
-          gwpTp_1st_Year: this.gwp_tp_1y,
-          gwpTp_2nd_3rd_Year: this.gwp_tp_3y,
+          gwpTotal: this.gwp_total !== null ? this.gwp_total : 0,
+          gwpOd: this.gwp_od !== null ? this.gwp_od : 0,
+          gwpTp_1st_Year: this.gwp_tp_1y !== null ? this.gwp_tp_1y : 0,
+          gwpTp_2nd_3rd_Year: this.gwp_tp_3y !== null ? this.gwp_tp_3y : 0,
 
-          commissionTotal: this.com_total,
-          commissionOd: this.com_od,
-          commissionTp_1st_Year: this.com_tp_1y,
-          commissionTp_2nd_3rd_Year: this.com_tp_3y,
+          commissionTotal: this.com_total !== null ? this.com_total : 0,
+          commissionOd: this.com_od !== null ? this.com_od : 0,
+          commissionTp_1st_Year: this.com_tp_1y === '--' ? 0 : this.com_tp_1y,
+          commissionTp_2nd_3rd_Year:
+            this.com_tp_3y === '--' ? 0 : this.com_tp_3y,
 
           fuelList: [
             {
@@ -258,21 +322,23 @@ export class SummaryComponent {
             },
           ],
 
-          // ccBtw1000To1500: this.,
-          // ccLessThan1000: 'string',
-          // ccLessThan5000: 'string',
+          // cc
+          ccLessThan1000: this.thou,
+          ccBtw1000To1500: this.thou_five,
+          ccLessThan5000: this.above_thou_five,
 
-          ncb: 'N/A',
-          nonNcb: 'N/A',
+          // ncb
+          ncb: 0,
+          nonNcb: this.non_ncb,
 
-          age1To4: 'N/A',
-          age5To10: 'N/A',
-          ageGrt10: 'N/A',
+          age1To4: this.four,
+          age5To10: 0,
+          ageGrt10: 0,
 
-          sodRenewal: 'N/A',
-          sodRollOver: 'N/A',
-          compRenewal: 'N/A',
-          compRollOver: 'N/A',
+          sodRenewal: 0,
+          sodRollOver: 0,
+          compRenewal: 0,
+          compRollOver: 0,
         },
         {
           // id: 0,
@@ -281,15 +347,18 @@ export class SummaryComponent {
           carType: 'Old Car',
           tranId: this.sessData.tranId,
 
-          gwpTotal: this.old_gwp_total,
-          gwpOd: this.old_gwp_od,
-          gwpTp_1st_Year: this.old_gwp_tp_1y,
-          gwpTp_2nd_3rd_Year: this.old_gwp_tp_3y,
+          gwpTotal: this.old_gwp_total !== null ? this.old_gwp_total : 0,
+          gwpOd: this.old_gwp_od !== null ? this.old_gwp_od : 0,
+          gwpTp_1st_Year: this.old_gwp_tp_1y !== null ? this.old_gwp_tp_1y : 0,
+          gwpTp_2nd_3rd_Year:
+            this.old_gwp_tp_3y === '--' ? 0 : this.old_gwp_tp_3y,
 
-          commissionTotal: this.old_com_total,
-          commissionOd: this.old_com_od,
-          commissionTp_1st_Year: this.old_com_tp_1y,
-          commissionTp_2nd_3rd_Year: this.old_com_tp_3y,
+          commissionTotal: this.old_com_total !== null ? this.old_com_total : 0,
+          commissionOd: this.old_com_od !== null ? this.old_com_od : 0,
+          commissionTp_1st_Year:
+            this.old_com_tp_1y !== null ? this.old_com_tp_1y : 0,
+          commissionTp_2nd_3rd_Year:
+            this.old_com_tp_3y === '--' ? 0 : this.old_com_tp_3y,
 
           fuelList: [
             {
@@ -309,21 +378,33 @@ export class SummaryComponent {
             },
           ],
 
-          // ccBtw1000To1500: this.,
-          // ccLessThan1000: 'string',
-          // ccLessThan5000: 'string',
+          // cc
+          ccLessThan1000: this.old_thou,
+          ccBtw1000To1500: this.old_thou_five,
+          ccLessThan5000: this.old_above_thou_five,
 
-          ncb: this.old_ncb,
-          nonNcb: this.old_non_ncb,
+          // ncm
+          ncb: this.old_ncb !== null ? this.old_ncb : 0,
+          nonNcb: this.old_non_ncb !== null ? this.old_non_ncb : 0,
 
-          age1To4: this.old_four,
-          age5To10: this.old_ten,
-          ageGrt10: this.old_above_ten,
+          age1To4: this.old_four !== null ? this.old_four : 0,
+          age5To10: this.old_ten !== null ? this.old_ten : 0,
+          ageGrt10: this.old_above_ten !== null ? this.old_above_ten : 0,
 
-          sodRenewal: this.sessData.renewal_sod,
-          sodRollOver: this.sessData.rollover_sod,
-          compRenewal: this.sessData.renewal_comp,
-          compRollOver: this.sessData.rollover_comp,
+          sodRenewal:
+            this.sessData.renewal_sod !== null ? this.sessData.renewal_sod : 0,
+          sodRollOver:
+            this.sessData.rollover_sod !== null
+              ? this.sessData.rollover_sod
+              : 0,
+          compRenewal:
+            this.sessData.renewal_comp !== null
+              ? this.sessData.renewal_comp
+              : 0,
+          compRollOver:
+            this.sessData.rollover_comp !== null
+              ? this.sessData.rollover_comp
+              : 0,
         },
       ],
     };

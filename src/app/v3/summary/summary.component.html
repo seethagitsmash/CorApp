@@ -78,10 +78,12 @@
               </div>
               <!-- total -->
               <div class="row tab_row_label btp od_tab">
-                <label class="bt">{{ gwp_total + old_gwp_total }}</label>
-                <label class="mid_label_l bt">{{ gwp_od + old_gwp_od }} </label>
+                <label class="bt">{{ +gwp_total + +old_gwp_total }}</label>
+                <label class="mid_label_l bt"
+                  >{{ +gwp_od + +old_gwp_od }}
+                </label>
                 <label class="mid_label bt">{{
-                  gwp_tp_1y + old_gwp_tp_1y
+                  +gwp_tp_1y + +old_gwp_tp_1y
                 }}</label>
                 <label class="bt">{{ gwp_tp_3y }}</label>
               </div>
@@ -89,7 +91,7 @@
 
             <!-- Commission -->
             <div class="col">
-              <label>Commission</label>
+              <label>Acquisition Cost</label>
               <div class="row tab_row_label p-t-7 od_tab">
                 <label>Total</label>
                 <label class="mid_label_l">OD</label>
@@ -105,13 +107,13 @@
                 <label class="bt">{{ com_tp_3y }}</label>
               </div>
               <div class="row tab_row_label od_tab">
-                <label class="bt">{{ com_total }}</label>
+                <label class="bt">{{ old_com_total }}</label>
                 <label class="mid_label_l bt">{{ old_com_od }}</label>
                 <label class="mid_label bt">{{ old_com_tp_1y }}</label>
                 <label class="bt">{{ old_com_tp_3y }}</label>
               </div>
               <div class="row tab_row_label btp od_tab">
-                <label class="bt">{{ com_total + com_total }}</label>
+                <label class="bt">{{ +com_total + +old_com_total }}</label>
                 <label class="mid_label_l bt">{{ com_od + old_com_od }}</label>
                 <label class="mid_label bt">{{ old_com_tp_1y }}</label>
                 <label class="bt">{{ com_tp_3y }}</label>
@@ -188,8 +190,8 @@
 
               <!-- Values -->
               <div class="row tab_row_label p-t-7">
-                <label class="two_col bt">--</label>
-                <label class="two_col2 bt">--</label>
+                <label class="two_col bt">{{ ncb }}</label>
+                <label class="two_col2 bt">{{ non_ncb }}</label>
               </div>
               <div class="row tab_row_label">
                 <label class="two_col bt">{{ old_ncb }}</label>
@@ -197,7 +199,7 @@
               </div>
               <div class="row tab_row_label btp">
                 <label class="two_col bt">{{ old_ncb }}</label>
-                <label class="two_col2 bt">{{ old_non_ncb }}</label>
+                <label class="two_col2 bt">{{ non_ncb + old_non_ncb }}</label>
               </div>
             </div>
 
@@ -212,9 +214,9 @@
 
               <!-- Values -->
               <div class="row tab_row_label p-t-7">
-                <label class="bt">--</label>
-                <label class="mid_label bt">--</label>
-                <label class="bt">--</label>
+                <label class="bt">{{ four }}</label>
+                <label class="mid_label bt">{{ ten }}</label>
+                <label class="bt">{{ above_ten }}</label>
               </div>
               <div class="row tab_row_label">
                 <label class="bt">{{ old_four }}</label>
@@ -222,7 +224,7 @@
                 <label class="bt">{{ old_above_ten }}</label>
               </div>
               <div class="row tab_row_label btp">
-                <label class="bt">{{ old_four }}</label>
+                <label class="bt">{{ four + old_four }}</label>
                 <label class="mid_label bt">{{ old_ten }}</label>
                 <label class="bt">{{ old_above_ten }}</label>
               </div>
@@ -275,7 +277,7 @@
                   </div>
 
                   <div class="row">
-                    <input
+                    <!-- <input
                       class="col dealer_inp"
                       type="number"
                       placeholder="00"
@@ -284,7 +286,21 @@
                       max="12"
                       [(ngModel)]="month"
                       [ngClass]="{ error: checkError('month') }"
-                    />
+                    /> -->
+                    <nz-select
+                      class="col dealer_inp"
+                      nzShowSearch
+                      nzAllowClear
+                      nzPlaceHolder=""
+                      [(ngModel)]="month"
+                      [ngClass]="{ error: checkError('month') }"
+                    >
+                      <nz-option
+                        *ngFor="let month of monthList"
+                        [nzLabel]="month.name"
+                        [nzValue]="month.value"
+                      ></nz-option>
+                    </nz-select>
                     <input
                       class="col dealer_inp"
                       type="number"
@@ -308,7 +324,7 @@
                 class="bg-green"
                 (click)="handleModalVisible()"
               >
-                Add New BA Code
+                Add New Dealer
               </button>
               <!-- <div class="row bg-green">Add New BA Code</div>
             <div class="row dealer_inp">
@@ -349,7 +365,7 @@
     <nz-modal
       nzCentered
       [(nzVisible)]="isBaModalVisible"
-      nzTitle="Add New BA Code"
+      nzTitle="Add New Dealer"
       [nzFooter]="modalFooter"
       (nzOnCancel)="handleModalVisible()"
       nzMaskClosable="false"
@@ -357,15 +373,38 @@
       <ng-container *nzModalContent>
         <div class="row ba_comp">
           <div class="row">
-            <label class="col">BA code</label>
+            <label class="col">Dealer name</label>
             <div class="col">
-              <input class="" type="text" placeholder="00" id="new_ba_code" />
+              <input
+                class=""
+                type="text"
+                placeholder="Dealer name"
+                id="new_ba_code"
+              />
             </div>
           </div>
+
           <div class="row mt-3">
             <label class="col">Group</label>
             <div class="col">
-              <input class="" type="text" placeholder="00" id="new_ba_group" />
+              <input
+                class=""
+                type="text"
+                placeholder="Group"
+                id="new_ba_group"
+              />
+            </div>
+          </div>
+
+          <div class="row mt-3">
+            <label class="col">Mobile number</label>
+            <div class="col">
+              <input
+                class=""
+                type="number"
+                placeholder="0000000000"
+                id="new_ba_group"
+              />
             </div>
           </div>
         </div>

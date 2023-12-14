@@ -45,7 +45,7 @@
   }
 
   .next {
-    right: 5%;
+    right: 6%;
     position: fixed;
   }
 }
@@ -110,4 +110,20 @@
 .bg_b {
   margin-top: 7px;
   background-color: rgb(0, 176, 240);
+}
+::ng-deep {
+  .ant-message-notice-content {
+    background: #ff000085;
+    color: white;
+    background-color: #ff000085;
+  }
+
+  .ant-message-custom-content {
+    font-size: 22px;
+
+    svg {
+      color: #ffffff;
+      margin-bottom: 9px;
+    }
+  }
 }

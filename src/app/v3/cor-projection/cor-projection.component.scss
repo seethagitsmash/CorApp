@@ -72,7 +72,7 @@
   }
 
   .next {
-    right: 5%;
+    right: 6%;
     position: fixed;
   }
 }
@@ -119,5 +119,29 @@
     font-weight: 600;
     text-align: left;
     padding-left: 12px;
+  }
+}
+::ng-deep {
+  // .ant-message-notice-content {
+  //   background-color: rgb(0 255 6 / 43%) !important;
+  // }
+
+  // .ant-message-error {
+  //   background: #ff000085;
+  //   color: white;
+  //   background-color: #ff000085;
+  // }
+
+  // .ant-message-success {
+  //   color: #000000;
+  // }
+
+  .ant-message-custom-content {
+    font-size: 22px;
+
+    svg {
+      color: #000000;
+      margin-bottom: 9px;
+    }
   }
 }

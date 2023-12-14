@@ -45,7 +45,7 @@
   }
 
   .next {
-    right: 5%;
+    right: 6%;
     position: fixed;
   }
 }
@@ -82,4 +82,21 @@
 .multi {
   opacity: 0.3;
   cursor: not-allowed;
+}
+
+::ng-deep {
+  .ant-message-notice-content {
+    background: #ff000085;
+    color: white;
+    background-color: #ff000085;
+  }
+
+  .ant-message-custom-content {
+    font-size: 22px;
+
+    svg {
+      color: #ffffff;
+      margin-bottom: 9px;
+    }
+  }
 }

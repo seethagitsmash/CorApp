@@ -71,3 +71,20 @@ input:focus-visible {
 .hide_me {
   display: none;
 }
+
+::ng-deep {
+  .ant-message-notice-content {
+    background: #ff000085;
+    color: white;
+    background-color: #ff000085;
+  }
+
+  .ant-message-custom-content {
+    font-size: 22px;
+
+    svg {
+      color: #ffffff;
+      margin-bottom: 9px;
+    }
+  }
+}

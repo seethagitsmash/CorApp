@@ -66,11 +66,11 @@ export class BtypeStpComponent {
 
       if ('renewal' in a) {
         this.renewal = a.renewal;
-        this.rollover = a.rollover;
+        this.rollover = +a.old_car_total - +a.renewal;
         this.renewal_sod = a.renewal_sod;
-        this.renewal_comp = a.renewal_comp;
+        this.renewal_comp = +a.renewal - a.renewal_sod;
         this.rollover_sod = a.rollover_sod;
-        this.rollover_comp = a.rollover_comp;
+        this.rollover_comp = +a.old_car_total - +a.renewal - a.rollover_sod;
       }
     }
   }
@@ -118,13 +118,13 @@ export class BtypeStpComponent {
   handleErrorField(): boolean {
     let hasError: boolean = false;
 
-    if (+this.renewal === 0 || +this.renewal < 0) {
+    if (+this.renewal < 0) {
       this.errorList.push({
         field: 'renewal',
       });
       hasError = true;
     }
-    if (+this.rollover === 0 || +this.rollover < 0) {
+    if (+this.rollover < 0) {
       this.errorList.push({
         field: 'rollover',
       });

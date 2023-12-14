@@ -7,7 +7,7 @@ interface getModel {
 
 @Injectable({ providedIn: 'root' })
 export class ApiService {
-  // apiUrl = 'http://localhost:8080';
+  // apiUrl = 'http://localhost:8084/';
   apiUrl = 'http://rsgitstm198:8084/';
 
   constructor(private http: HttpClient) {}
@@ -67,6 +67,15 @@ export class ApiService {
     );
   }
 
+  getOdTpValue(body: any) {
+    const header = this.header();
+    return this.http.post<any[]>(
+      `${this.apiUrl}corSimulator/calculateOdTpDetails`,
+      body,
+      header
+    );
+  }
+
   getDealer(body: any = {}) {
     const header = this.header();
     return this.http.post<any[]>(
@@ -80,6 +89,15 @@ export class ApiService {
     const header = this.header();
     return this.http.post<any[]>(
       `${this.apiUrl}corSimulator/saveAndUpdateSummary`,
+      body,
+      header
+    );
+  }
+
+  getProjectedCorDetail(body: any) {
+    const header = this.header();
+    return this.http.post<any[]>(
+      `${this.apiUrl}corSimulator/projectedCORData`,
       body,
       header
     );

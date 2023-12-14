@@ -1,6 +1,7 @@
 import { Router } from '@angular/router';
 import { Component } from '@angular/core';
 import { NzMessageService } from 'ng-zorro-antd/message';
+import { ApiService } from '../api.service';
 
 @Component({
   selector: 'app-od-tp-mix',
@@ -16,22 +17,28 @@ export class OdTpMixComponent {
   gwp_od: number = 0;
   gwp_tp: number = 0;
   com_od: number = 0;
-  com_tp: string = 'NA';
+  com_tp: string = '--';
 
   old_gwp_od: number = 0;
   old_gwp_tp: number = 0;
   old_com_od: number = 0;
   old_com_tp: number = 2.0;
 
+  sessData: any;
+  newCarSummary: any;
+  oldCarSummary: any;
   isSpinning: boolean = true;
   isLoading: boolean = false;
 
-  constructor(private router: Router, private message: NzMessageService) {}
+  constructor(
+    private router: Router,
+    private message: NzMessageService,
+    private apiService: ApiService
+  ) {}
   ngOnInit() {
     this.handleUserAuth();
     this.handleSessionReload();
-
-    this.isSpinning = false;
+    this.getOdTpValue();
   }
 
   handleUserAuth(): void {
@@ -39,6 +46,73 @@ export class OdTpMixComponent {
     if (decodedCookie != 'true') {
       this.router.navigate(['/']);
     }
+  }
+
+  handleSessionReload(): void {
+    let cor = sessionStorage.getItem('cor');
+    if (cor === null) {
+      this.router.navigate(['/cor/simulator/selection']);
+    } else {
+      let a = JSON.parse(cor);
+      this.new_gwp = a.new_car_total;
+      this.old_gwp = a.old_car_total;
+      this.sessData = a;
+
+      if ('old_gwp_od' in a) {
+        this.gwp_od = a.gwp_od;
+        this.gwp_tp = a.gwp_tp;
+        this.old_gwp_od = a.old_gwp_od;
+        this.old_gwp_tp = a.old_gwp_tp;
+
+        this.com_od = a.com_od;
+        this.com_tp = a.com_tp;
+        this.old_com_od = a.old_com_od;
+        this.old_com_tp = a.old_com_tp;
+      }
+    }
+  }
+
+  getOdTpValue(): void {
+    const body = {
+      renewalCompPercentage:
+        this.sessData.renewal_comp !== null ? this.sessData.renewal_comp : 0,
+      renewalSodPercentage:
+        this.sessData.renewal_sod !== null ? this.sessData.renewal_sod : 0,
+      rollOverCompPercentage:
+        this.sessData.rollover_comp !== null ? this.sessData.rollover_comp : 0,
+      rollOverSodPercentage:
+        this.sessData.rollover_sod !== null ? this.sessData.rollover_sod : 0,
+      tranId: this.sessData.tranId,
+      userName: sessionStorage.getItem('user'),
+    };
+
+    this.apiService.getOdTpValue(body).subscribe((response: any) => {
+      this.isSpinning = false;
+
+      if (response.errMsg !== null) {
+        this.createMessage('error', response.errMsg);
+        return;
+      }
+
+      this.newCarSummary = response.summaryDtlsList.find((e: any) => {
+        if (e.carType === 'New Car') return e;
+      });
+      this.oldCarSummary = response.summaryDtlsList.find((e: any) => {
+        if (e.carType === 'Old Car') return e;
+      });
+
+      this.gwp_od = +this.newCarSummary.gwpOd;
+      this.gwp_tp =
+        +this.newCarSummary.gwpTp_1st_Year +
+        +this.newCarSummary.gwpTp_2nd_3rd_Year;
+      this.old_gwp_od = +this.oldCarSummary.gwpOd;
+      // Dont consider 2+3 yr value in total, since 2+3rd yr is not applicable for TP
+      this.old_gwp_tp =
+        +this.oldCarSummary.gwpTp_1st_Year +
+        +this.oldCarSummary.gwpTp_2nd_3rd_Year;
+
+      this.handleErrorField();
+    });
   }
 
   createMessage(type: string, message: string): void {
@@ -53,39 +127,26 @@ export class OdTpMixComponent {
       let a = JSON.parse(cor);
 
       a.gwp_od = this.gwp_od;
-      a.gwp_tp = this.gwp_tp;
+      a.gwp_tp_1y = +this.newCarSummary.gwpTp_1st_Year;
+      a.gwp_tp_3y = +this.newCarSummary.gwpTp_2nd_3rd_Year;
+
       a.old_gwp_od = this.old_gwp_od;
-      a.old_gwp_tp = this.old_gwp_tp;
+      a.old_gwp_tp_1y = +this.oldCarSummary.gwpTp_1st_Year;
+      a.old_gwp_tp_3y = +this.oldCarSummary.gwpTp_2nd_3rd_Year;
 
       a.com_od = this.com_od;
       a.com_tp = this.com_tp;
       a.old_com_od = this.old_com_od;
       a.old_com_tp = this.old_com_tp;
 
+      a.thou = +this.newCarSummary.ccLessThan1000;
+      a.thou_five = +this.newCarSummary.ccBtw1000To1500;
+      a.above_thou_five = +this.newCarSummary.ccLessThan5000;
+      a.old_thou = +this.oldCarSummary.ccLessThan1000;
+      a.old_thou_five = +this.oldCarSummary.ccBtw1000To1500;
+      a.old_above_thou_five = +this.oldCarSummary.ccLessThan5000;
+
       sessionStorage.setItem('cor', JSON.stringify(a));
-    }
-  }
-
-  handleSessionReload(): void {
-    let cor = sessionStorage.getItem('cor');
-    if (cor === null) {
-      this.router.navigate(['/cor/simulator/selection']);
-    } else {
-      let a = JSON.parse(cor);
-      this.new_gwp = a.new_car_total;
-      this.old_gwp = a.old_car_total;
-
-      if ('old_gwp_od' in a) {
-        this.gwp_od = a.gwp_od;
-        this.gwp_tp = a.gwp_tp;
-        this.old_gwp_od = a.old_gwp_od;
-        this.old_gwp_tp = a.old_gwp_tp;
-
-        this.com_od = a.com_od;
-        this.com_tp = a.com_tp;
-        this.old_com_od = a.old_com_od;
-        this.old_com_tp = a.old_com_tp;
-      }
     }
   }
 
@@ -112,6 +173,7 @@ export class OdTpMixComponent {
       return;
     }
     this.handleSession();
+
     this.router.navigate(['/cor/summary']);
   }
 

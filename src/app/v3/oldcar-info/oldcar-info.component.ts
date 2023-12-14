@@ -57,12 +57,15 @@ export class OldcarInfoComponent {
     } else {
       let a = JSON.parse(cor);
       this.old_gwp = a.old_car_total;
+      this.old_non_ncb = +a.old_car_total - +this.old_ncb;
+      this.old_above_ten = +a.old_car_total - (+this.old_four + +this.old_ten);
+
       if ('old_non_ncb' in a) {
         this.old_ncb = a.old_ncb;
-        this.old_non_ncb = a.old_non_ncb;
+        this.old_non_ncb = +a.old_car_total - +a.old_ncb;
         this.old_four = a.old_four;
         this.old_ten = a.old_ten;
-        this.old_above_ten = a.old_above_ten;
+        this.old_above_ten = +a.old_car_total - (+a.old_four + +a.old_ten);
       }
     }
   }
@@ -132,7 +135,7 @@ export class OldcarInfoComponent {
     let hasError: boolean = false;
 
     // NCB
-    if (+this.old_ncb === 0 || +this.old_ncb < 0) {
+    if (+this.old_ncb < 0) {
       this.errorList.push({
         field: 'old_ncb',
       });
@@ -140,10 +143,7 @@ export class OldcarInfoComponent {
     }
 
     // Non- NCB
-    if (
-      (+this.old_ncb !== 0 && +this.old_non_ncb === 0) ||
-      +this.old_non_ncb < 0
-    ) {
+    if (+this.old_non_ncb < 0) {
       this.errorList.push({
         field: 'old_non_ncb',
       });
@@ -151,7 +151,7 @@ export class OldcarInfoComponent {
     }
 
     // 1-4
-    if (+this.old_four === 0 || +this.old_four < 0) {
+    if (+this.old_four < 0) {
       this.errorList.push({
         field: 'old_four',
       });
@@ -159,7 +159,7 @@ export class OldcarInfoComponent {
     }
 
     // 5-10
-    if (+this.old_ten === 0 || +this.old_ten < 0) {
+    if (+this.old_ten < 0) {
       this.errorList.push({
         field: 'old_ten',
       });
@@ -167,11 +167,7 @@ export class OldcarInfoComponent {
     }
 
     // > 10
-    if (
-      +this.old_four !== 0 &&
-      +this.old_ten !== 0 &&
-      (+this.old_above_ten === 0 || +this.old_above_ten < 0)
-    ) {
+    if (+this.old_above_ten < 0) {
       this.errorList.push({
         field: 'old_above_ten',
       });

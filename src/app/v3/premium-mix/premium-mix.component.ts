@@ -29,12 +29,14 @@ export class PremiumMixComponent {
       this.new = a.new_car_total;
       this.old = a.old_car_total;
       this.total_gwp = a.car_total;
+      this.gwpForPieChart = [a.new_car_total, a.old_car_total, a.car_total];
     }
   }
 
-  new: number = 140;
-  old: number = 40;
-  total_gwp: number = 180;
+  new: number = 0;
+  old: number = 0;
+  total_gwp: number = 0;
+  gwpForPieChart: number[] = [];
 
   handleBackPage(): void {
     this.router.navigate(['/cor/oldcar']);

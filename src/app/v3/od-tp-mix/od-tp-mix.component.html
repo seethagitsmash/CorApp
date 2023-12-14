@@ -79,7 +79,7 @@
                       placeholder="00"
                       id="gwp"
                       autofocus
-                      [(ngModel)]="gwp_od"
+                      [value]="gwp_od"
                       [ngClass]="{ error: checkError('gwp_od') }"
                     />
                     <input
@@ -101,7 +101,7 @@
                       type="number"
                       placeholder="00"
                       id="gwp"
-                      [(ngModel)]="gwp_tp"
+                      [value]="gwp_tp"
                       [ngClass]="{ error: checkError('gwp_tp') }"
                     />
                     <input
@@ -121,7 +121,7 @@
                 <div class="row mb-1">
                   <div class="col">
                     <label class="pg_head"
-                      >Acquisition cost on OD %
+                      >Acquisition cost on OD including IRDA %
                       <span class="text-danger"> *</span></label
                     >
                   </div>
@@ -138,6 +138,8 @@
                       [(ngModel)]="com_od"
                       [ngClass]="{ error: checkError('com_od') }"
                     />
+                    <span id="my-suffix">%</span>
+
                     <input
                       class="mb-1"
                       type="number"
@@ -146,6 +148,7 @@
                       [(ngModel)]="old_com_od"
                       [ngClass]="{ error: checkError('old_com_od') }"
                     />
+                    <span id="my-suffix">%</span>
                   </div>
 
                   <div class="col">
@@ -167,6 +170,7 @@
                       [(ngModel)]="old_com_tp"
                       [ngClass]="{ error: checkError('old_com_tp') }"
                     />
+                    <span id="my-suffix">%</span>
                   </div>
                 </div>
               </div>

@@ -45,7 +45,7 @@
   }
 
   .next {
-    right: 5%;
+    right: 6%;
     position: fixed;
   }
 }
@@ -123,4 +123,25 @@
   .ant-spin-container {
     height: 100% !important;
   }
+
+  .ant-message-notice-content {
+    background: #ff000085;
+    color: white;
+    background-color: #ff000085;
+  }
+
+  .ant-message-custom-content {
+    font-size: 22px;
+
+    svg {
+      color: #ffffff;
+      margin-bottom: 9px;
+    }
+  }
+}
+
+#my-suffix {
+  margin-left: -40px !important;
+  margin-top: 9px !important;
+  font-size: larger !important;
 }
