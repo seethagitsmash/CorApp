@@ -111,16 +111,28 @@ export class SummaryComponent {
   year: number = 2023;
   month: number = 11;
   new_ba_code: string = '';
+  newDealerNameError: string = '';
+  newDealerMobileError: string = '';
 
+  // Dealer
   dealerList: dealerListImp[] = [];
+  new_dealer: string = '';
+  new_dealer_group: string = '';
+  new_dealer_mobile: number = 0;
+
+  // Session
   sessData: any = '';
   isBaModalVisible: boolean = false;
 
+  // setup
   errorList: any = [];
   currentYear: number = 0;
   currentMonth: number = 0;
   isSpinning: boolean = false;
   isLoading: boolean = false;
+
+  //
+  mobileRegex: any = /^([0|\+[0-9]{10})$/;
 
   monthList: any = [
     {
@@ -469,11 +481,60 @@ export class SummaryComponent {
     this.isBaModalVisible = !this.isBaModalVisible;
   }
 
-  handleAddBa(): void {
-    console.log();
-  }
-
   handleLogout(): void {
     this.router.navigate(['/']);
+  }
+
+  handleRoundof(val: any): any {
+    if (val === '--') return val;
+    return Math.round(val);
+  }
+
+  handleDealerCreation(): void {
+    if (this.new_dealer === '') {
+      this.newDealerNameError = 'Dealer name is required';
+      return;
+    } else if (this.new_dealer.length < 3) {
+      this.newDealerNameError = 'Dealer name must contain atleast 3 character';
+      return;
+    } else {
+      this.newDealerNameError = '';
+    }
+
+    if (
+      this.new_dealer_mobile !== 0 &&
+      !this.mobileRegex.test(this.new_dealer_mobile)
+    ) {
+      this.newDealerMobileError = 'Not a valid mobile number';
+      return;
+    } else if (this.mobileRegex.test(this.new_dealer_mobile)) {
+      this.newDealerMobileError = '';
+    }
+
+    const body = {
+      dealerCode: 'DL',
+      dealerName: this.new_dealer,
+      emailId: '',
+      group: this.new_dealer_group,
+      mobileNo: this.new_dealer_mobile,
+      userName: this.new_dealer,
+    };
+
+    this.apiService.createDealer(body).subscribe((response: any) => {
+      if (response.errMsg !== null) {
+        this.createMessage('error', response.errMsg);
+        setTimeout(() => {
+          this.isLoading = false;
+        }, 3000);
+        return;
+      }
+
+      this.createMessage('success', response.successMsg);
+
+      this.dealerList = response.dealerMaster;
+      this.dealer_name = response.dealerMaster[0].dealer;
+
+      this.handleModalVisible();
+    });
   }
 }

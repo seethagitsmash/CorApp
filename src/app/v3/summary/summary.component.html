@@ -64,28 +64,38 @@
               <!-- Values -->
               <!-- new -->
               <div class="row tab_row_label p-t-7 od_tab">
-                <label class="bt">{{ gwp_total }}</label>
-                <label class="mid_label_l bt">{{ gwp_od }}</label>
-                <label class="mid_label bt">{{ gwp_tp_1y }}</label>
-                <label class="bt">{{ gwp_tp_3y }}</label>
+                <label class="bt">{{ handleRoundof(gwp_total) }}</label>
+                <label class="mid_label_l bt">{{
+                  handleRoundof(gwp_od)
+                }}</label>
+                <label class="mid_label bt">{{
+                  handleRoundof(gwp_tp_1y)
+                }}</label>
+                <label class="bt">{{ handleRoundof(gwp_tp_3y) }}</label>
               </div>
               <!-- old -->
               <div class="row tab_row_label od_tab">
-                <label class="bt">{{ old_gwp_total }}</label>
-                <label class="mid_label_l bt">{{ old_gwp_od }}</label>
-                <label class="mid_label bt">{{ old_gwp_tp_1y }}</label>
-                <label class="bt">{{ old_gwp_tp_3y }}</label>
+                <label class="bt">{{ handleRoundof(old_gwp_total) }}</label>
+                <label class="mid_label_l bt">{{
+                  handleRoundof(old_gwp_od)
+                }}</label>
+                <label class="mid_label bt">{{
+                  handleRoundof(old_gwp_tp_1y)
+                }}</label>
+                <label class="bt">{{ handleRoundof(old_gwp_tp_3y) }}</label>
               </div>
               <!-- total -->
               <div class="row tab_row_label btp od_tab">
-                <label class="bt">{{ +gwp_total + +old_gwp_total }}</label>
+                <label class="bt">{{
+                  handleRoundof(+gwp_total + +old_gwp_total)
+                }}</label>
                 <label class="mid_label_l bt"
-                  >{{ +gwp_od + +old_gwp_od }}
+                  >{{ handleRoundof(+gwp_od + +old_gwp_od) }}
                 </label>
                 <label class="mid_label bt">{{
-                  +gwp_tp_1y + +old_gwp_tp_1y
+                  handleRoundof(+gwp_tp_1y + +old_gwp_tp_1y)
                 }}</label>
-                <label class="bt">{{ gwp_tp_3y }}</label>
+                <label class="bt">{{ handleRoundof(gwp_tp_3y) }}</label>
               </div>
             </div>
 
@@ -101,22 +111,36 @@
 
               <!-- Values -->
               <div class="row tab_row_label p-t-7 od_tab">
-                <label class="bt">{{ com_total }}</label>
-                <label class="mid_label_l bt">{{ com_od }}</label>
-                <label class="mid_label bt">{{ com_tp_1y }}</label>
-                <label class="bt">{{ com_tp_3y }}</label>
+                <label class="bt">{{ handleRoundof(com_total) }}</label>
+                <label class="mid_label_l bt">{{
+                  handleRoundof(com_od)
+                }}</label>
+                <label class="mid_label bt">{{
+                  handleRoundof(com_tp_1y)
+                }}</label>
+                <label class="bt">{{ handleRoundof(com_tp_3y) }}</label>
               </div>
               <div class="row tab_row_label od_tab">
-                <label class="bt">{{ old_com_total }}</label>
-                <label class="mid_label_l bt">{{ old_com_od }}</label>
-                <label class="mid_label bt">{{ old_com_tp_1y }}</label>
-                <label class="bt">{{ old_com_tp_3y }}</label>
+                <label class="bt">{{ handleRoundof(old_com_total) }}</label>
+                <label class="mid_label_l bt">{{
+                  handleRoundof(old_com_od)
+                }}</label>
+                <label class="mid_label bt">{{
+                  handleRoundof(old_com_tp_1y)
+                }}</label>
+                <label class="bt">{{ handleRoundof(old_com_tp_3y) }}</label>
               </div>
               <div class="row tab_row_label btp od_tab">
-                <label class="bt">{{ +com_total + +old_com_total }}</label>
-                <label class="mid_label_l bt">{{ com_od + old_com_od }}</label>
-                <label class="mid_label bt">{{ old_com_tp_1y }}</label>
-                <label class="bt">{{ com_tp_3y }}</label>
+                <label class="bt">{{
+                  handleRoundof(+com_total + +old_com_total)
+                }}</label>
+                <label class="mid_label_l bt">{{
+                  handleRoundof(com_od + old_com_od)
+                }}</label>
+                <label class="mid_label bt">{{
+                  handleRoundof(old_com_tp_1y)
+                }}</label>
+                <label class="bt">{{ handleRoundof(com_tp_3y) }}</label>
               </div>
             </div>
 
@@ -131,21 +155,33 @@
 
               <!-- Values -->
               <div class="row tab_row_label p-t-7 ft_tab">
-                <label class="two_col bt">{{ diesel }}</label>
-                <label class="mid_label two_col2 bt">{{ petrol }}</label>
-                <label class="two_col2 bt">{{ electric }}</label>
+                <label class="two_col bt">{{ handleRoundof(diesel) }}</label>
+                <label class="mid_label two_col2 bt">{{
+                  handleRoundof(petrol)
+                }}</label>
+                <label class="two_col2 bt">{{ handleRoundof(electric) }}</label>
               </div>
               <div class="row tab_row_label ft_tab">
-                <label class="two_col bt">{{ old_diesel }}</label>
-                <label class="mid_label two_col2 bt">{{ old_petrol }}</label>
-                <label class="two_col2 bt">{{ old_electric }}</label>
+                <label class="two_col bt">{{
+                  handleRoundof(old_diesel)
+                }}</label>
+                <label class="mid_label two_col2 bt">{{
+                  handleRoundof(old_petrol)
+                }}</label>
+                <label class="two_col2 bt">{{
+                  handleRoundof(old_electric)
+                }}</label>
               </div>
               <div class="row tab_row_label btp ft_tab">
-                <label class="two_col bt">{{ diesel + old_diesel }}</label>
-                <label class="mid_label two_col2 bt">{{
-                  petrol + old_petrol
+                <label class="two_col bt">{{
+                  handleRoundof(diesel + old_diesel)
                 }}</label>
-                <label class="two_col2 bt">{{ electric + old_electric }}</label>
+                <label class="mid_label two_col2 bt">{{
+                  handleRoundof(petrol + old_petrol)
+                }}</label>
+                <label class="two_col2 bt">{{
+                  handleRoundof(electric + old_electric)
+                }}</label>
               </div>
             </div>
 
@@ -160,22 +196,28 @@
 
               <!-- Values -->
               <div class="row tab_row_label p-t-7">
-                <label class="bt">{{ thou }}</label>
-                <label class="mid_label bt">{{ thou_five }}</label>
-                <label class="bt">{{ above_thou_five }}</label>
+                <label class="bt">{{ handleRoundof(thou) }}</label>
+                <label class="mid_label bt">{{
+                  handleRoundof(thou_five)
+                }}</label>
+                <label class="bt">{{ handleRoundof(above_thou_five) }}</label>
               </div>
               <div class="row tab_row_label">
-                <label class="bt">{{ old_thou }}</label>
-                <label class="mid_label bt">{{ old_thou_five }}</label>
-                <label class="bt">{{ old_above_thou_five }}</label>
-              </div>
-              <div class="row tab_row_label btp">
-                <label class="bt">{{ thou + old_thou }}</label>
+                <label class="bt">{{ handleRoundof(old_thou) }}</label>
                 <label class="mid_label bt">{{
-                  thou_five + old_thou_five
+                  handleRoundof(old_thou_five)
                 }}</label>
                 <label class="bt">{{
-                  above_thou_five + old_above_thou_five
+                  handleRoundof(old_above_thou_five)
+                }}</label>
+              </div>
+              <div class="row tab_row_label btp">
+                <label class="bt">{{ handleRoundof(thou + old_thou) }}</label>
+                <label class="mid_label bt">{{
+                  handleRoundof(thou_five + old_thou_five)
+                }}</label>
+                <label class="bt">{{
+                  handleRoundof(above_thou_five + old_above_thou_five)
                 }}</label>
               </div>
             </div>
@@ -190,16 +232,20 @@
 
               <!-- Values -->
               <div class="row tab_row_label p-t-7">
-                <label class="two_col bt">{{ ncb }}</label>
-                <label class="two_col2 bt">{{ non_ncb }}</label>
+                <label class="two_col bt">{{ handleRoundof(ncb) }}</label>
+                <label class="two_col2 bt">{{ handleRoundof(non_ncb) }}</label>
               </div>
               <div class="row tab_row_label">
-                <label class="two_col bt">{{ old_ncb }}</label>
-                <label class="two_col2 bt">{{ old_non_ncb }}</label>
+                <label class="two_col bt">{{ handleRoundof(old_ncb) }}</label>
+                <label class="two_col2 bt">{{
+                  handleRoundof(old_non_ncb)
+                }}</label>
               </div>
               <div class="row tab_row_label btp">
-                <label class="two_col bt">{{ old_ncb }}</label>
-                <label class="two_col2 bt">{{ non_ncb + old_non_ncb }}</label>
+                <label class="two_col bt">{{ handleRoundof(old_ncb) }}</label>
+                <label class="two_col2 bt">{{
+                  handleRoundof(non_ncb + old_non_ncb)
+                }}</label>
               </div>
             </div>
 
@@ -214,19 +260,19 @@
 
               <!-- Values -->
               <div class="row tab_row_label p-t-7">
-                <label class="bt">{{ four }}</label>
-                <label class="mid_label bt">{{ ten }}</label>
-                <label class="bt">{{ above_ten }}</label>
+                <label class="bt">{{ handleRoundof(four) }}</label>
+                <label class="mid_label bt">{{ handleRoundof(ten) }}</label>
+                <label class="bt">{{ handleRoundof(above_ten) }}</label>
               </div>
               <div class="row tab_row_label">
-                <label class="bt">{{ old_four }}</label>
-                <label class="mid_label bt">{{ old_ten }}</label>
-                <label class="bt">{{ old_above_ten }}</label>
+                <label class="bt">{{ handleRoundof(old_four) }}</label>
+                <label class="mid_label bt">{{ handleRoundof(old_ten) }}</label>
+                <label class="bt">{{ handleRoundof(old_above_ten) }}</label>
               </div>
               <div class="row tab_row_label btp">
-                <label class="bt">{{ four + old_four }}</label>
-                <label class="mid_label bt">{{ old_ten }}</label>
-                <label class="bt">{{ old_above_ten }}</label>
+                <label class="bt">{{ handleRoundof(four + old_four) }}</label>
+                <label class="mid_label bt">{{ handleRoundof(old_ten) }}</label>
+                <label class="bt">{{ handleRoundof(old_above_ten) }}</label>
               </div>
             </div>
           </div>
@@ -380,7 +426,12 @@
                 type="text"
                 placeholder="Dealer name"
                 id="new_ba_code"
+                [(ngModel)]="new_dealer"
+                [ngClass]="{
+                  error: newDealerNameError !== ''
+                }"
               />
+              <span style="color: #ff0000">{{ newDealerNameError }}</span>
             </div>
           </div>
 
@@ -392,6 +443,7 @@
                 type="text"
                 placeholder="Group"
                 id="new_ba_group"
+                [(ngModel)]="new_dealer_group"
               />
             </div>
           </div>
@@ -404,7 +456,13 @@
                 type="number"
                 placeholder="0000000000"
                 id="new_ba_group"
+                max="9999999999"
+                [(ngModel)]="new_dealer_mobile"
+                [ngClass]="{
+                  error: newDealerMobileError !== ''
+                }"
               />
+              <span style="color: #ff0000">{{ newDealerMobileError }}</span>
             </div>
           </div>
         </div>
@@ -423,7 +481,7 @@
           nz-button
           nzType="primary"
           class="save_proceed"
-          (click)="handleAddBa()"
+          (click)="handleDealerCreation()"
         >
           Save and Use
         </button>

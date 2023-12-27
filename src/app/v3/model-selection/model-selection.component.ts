@@ -242,6 +242,20 @@ export class ModelSelectionComponent {
         });
         hasError = true;
       }
+      if (+e.new_gwp < 0) {
+        this.errorList.push({
+          index: i,
+          field: 'new',
+        });
+        hasError = true;
+      }
+      if (+e.old_gwp < 0) {
+        this.errorList.push({
+          index: i,
+          field: 'old',
+        });
+        hasError = true;
+      }
 
       // Find and map model name from model id
       const findModel = this.modelAllList.find(
@@ -315,6 +329,7 @@ export class ModelSelectionComponent {
 
   handleSaveModel(): void {
     this.handleSession();
+
     const user = sessionStorage.getItem('user');
 
     let body = {

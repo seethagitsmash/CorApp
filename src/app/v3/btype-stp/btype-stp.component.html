@@ -34,6 +34,7 @@
 
       <div class="body d_row">
         <div class="note">
+          <label>Transaction ID: {{ trans_id }}</label>
           <label>GWP in Lakhs Per Annum</label>
         </div>
 
@@ -65,6 +66,7 @@
                     <input
                       class="mb-1"
                       type="number"
+                      min="0"
                       placeholder="100"
                       id="renewal"
                       [(ngModel)]="renewal"
@@ -77,6 +79,7 @@
                     <label class="g_head mb-0">Rollover GWP</label>
                     <input
                       disabled
+                      min="0"
                       class="mb-1 bg_b mt-0"
                       type="number"
                       placeholder="00"
@@ -117,6 +120,7 @@
                   <div class="col">
                     <input
                       class="mb-1"
+                      min="0"
                       type="number"
                       placeholder="00"
                       id="renewal_sod"
@@ -126,6 +130,7 @@
                     />
                     <input
                       disabled
+                      min="0"
                       class="mb-1 bg_b mt-0"
                       type="number"
                       placeholder="100"
@@ -138,6 +143,7 @@
                   <div class="col">
                     <input
                       class="mb-1"
+                      min="0"
                       type="number"
                       placeholder="00"
                       id="rollover_sod"
@@ -147,6 +153,7 @@
                     />
                     <input
                       disabled
+                      min="0"
                       class="mb-1 bg_b mt-0"
                       type="number"
                       placeholder="00"

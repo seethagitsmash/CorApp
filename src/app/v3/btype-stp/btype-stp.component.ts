@@ -10,6 +10,7 @@ import { NzMessageService } from 'ng-zorro-antd/message';
 export class BtypeStpComponent {
   constructor(private router: Router, private message: NzMessageService) {}
 
+  trans_id: string = '';
   errorList: any = [];
   old_gwp: number = 0;
   renewal: number = 0;
@@ -59,6 +60,7 @@ export class BtypeStpComponent {
       this.router.navigate(['/cor/simulator/selection']);
     } else {
       let a = JSON.parse(cor);
+      this.trans_id = a.tranId;
       this.old_gwp = a.old_car_total;
       this.rollover = +this.old_gwp - +this.renewal;
       this.renewal_comp = +this.renewal - +this.renewal_sod;

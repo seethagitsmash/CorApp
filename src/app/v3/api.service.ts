@@ -9,6 +9,7 @@ interface getModel {
 export class ApiService {
   // apiUrl = 'http://localhost:8084/';
   apiUrl = 'http://rsgitstm198:8084/';
+  // apiUrl = 'http://rsgitstu80.ind.rsa-ins.com:8080/cor_simulator';
 
   constructor(private http: HttpClient) {}
 
@@ -80,6 +81,15 @@ export class ApiService {
     const header = this.header();
     return this.http.post<any[]>(
       `${this.apiUrl}master/fetchDealerDetails`,
+      body,
+      header
+    );
+  }
+
+  createDealer(body: any = {}) {
+    const header = this.header();
+    return this.http.post<any[]>(
+      `${this.apiUrl}master/saveDealerDetails`,
       body,
       header
     );

@@ -17,27 +17,35 @@
             <label>Password</label>
           </div>
           <div class="col-sm">
-            <input
-              type="text"
-              placeholder="Username"
-              id="username"
-              required
-              autofocus
-              [(ngModel)]="userName"
-            />
-            <br />
-            <input type="password" placeholder="*******" [(ngModel)]="pwd" />
-            <br />
+            <form>
+              <input
+                type="text"
+                name="userName"
+                placeholder="Username"
+                id="username"
+                required
+                autofocus
+                [(ngModel)]="userName"
+              />
+              <br />
+              <input
+                type="password"
+                name="pwd"
+                placeholder="*******"
+                [(ngModel)]="pwd"
+              />
+              <br />
 
-            <button
-              nz-button
-              nzType="primary"
-              class=""
-              [disabled]="isLoading"
-              (click)="handleAuthentication()"
-            >
-              Login
-            </button>
+              <button
+                nz-button
+                nzType="primary"
+                class=""
+                [disabled]="isLoading"
+                (click)="handleAuthentication()"
+              >
+                Login
+              </button>
+            </form>
           </div>
         </div>
       </div>

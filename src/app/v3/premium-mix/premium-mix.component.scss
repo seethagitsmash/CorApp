@@ -29,7 +29,7 @@
 }
 
 .body {
-  height: 66%;
+  height: 56.5%;
   margin: 20px;
   margin-top: 24px;
 
@@ -63,8 +63,23 @@
   width: 30%;
 }
 
+.note {
+  width: 333px;
+  margin-left: 22px;
+
+  label {
+    width: 100%;
+    font-weight: 600;
+    text-align: left;
+    padding-left: 12px;
+    background-color: yellow;
+  }
+}
+
 .d_row {
-  padding: 106px 50px;
+  // padding: 106px 170px;
+  // padding: 106px 50px;
+  padding: 90px 140px;
 
   .col {
     width: 0;

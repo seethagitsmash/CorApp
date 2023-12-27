@@ -9,6 +9,7 @@ import { ApiService } from '../api.service';
   styleUrls: ['./od-tp-mix.component.scss'],
 })
 export class OdTpMixComponent {
+  trans_id: string = '';
   errorList: any = [];
 
   new_gwp: number = 0;
@@ -54,6 +55,7 @@ export class OdTpMixComponent {
       this.router.navigate(['/cor/simulator/selection']);
     } else {
       let a = JSON.parse(cor);
+      this.trans_id = a.tranId;
       this.new_gwp = a.new_car_total;
       this.old_gwp = a.old_car_total;
       this.sessData = a;
@@ -169,7 +171,7 @@ export class OdTpMixComponent {
       setTimeout(() => {
         this.isLoading = false;
       }, 3000);
-      this.createMessage('error', 'Enter all required field values.');
+      this.createMessage('error', 'Enter valid value on all required fields.');
       return;
     }
     this.handleSession();

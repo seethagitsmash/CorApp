@@ -31,8 +31,11 @@
   <div class="main2_div">
     <div class="border_div">
       <div class="header">Premium Business Mix</div>
+      <div class="note">
+        <label>Transaction ID: {{ trans_id }}</label>
+      </div>
 
-      <div class="body d-flex">
+      <div class="body row">
         <div class="row d_row w_70">
           <div class="col">
             <label>New Car</label>
@@ -74,7 +77,7 @@
         </div>
 
         <div class="w_30" *ngIf="gwpForPieChart.length">
-          <app-piechart [gwpValue]="gwpForPieChart"></app-piechart>
+          <app-piechart [gwpForPieChart]="gwpForPieChart"></app-piechart>
         </div>
       </div>
 

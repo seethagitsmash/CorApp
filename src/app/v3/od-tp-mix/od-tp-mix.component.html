@@ -34,143 +34,156 @@
         <div class="header">OD TP Mix and Commission rate</div>
 
         <div class="body row d_row">
-          <div class="col l_col">
-            <div class="row">
-              <div class="col">
-                <div class="row mb-1">
-                  <div class="col">
-                    <label class="g_head">Car Type</label>
-                  </div>
-                </div>
+          <div class="note">
+            <label>Transaction ID: {{ trans_id }}</label>
+          </div>
 
-                <div class="row">
-                  <div class="col">
-                    <label class="g_head mb-3">Type</label>
-                    <label class="bg_b mt_7 mb-1">New Car</label>
-                    <label class="bg_b mt_7 mb-1">Old Car</label>
+          <div class="row">
+            <div class="col l_col">
+              <div class="row">
+                <div class="col">
+                  <div class="row mb-1">
+                    <div class="col">
+                      <label class="g_head">Car Type</label>
+                    </div>
                   </div>
 
-                  <div class="col">
-                    <label class="g_head mb-3">GWP</label>
-                    <label class="bg_b mt_7 mb-1">{{ new_gwp }}</label>
-                    <label class="bg_b mt_7 mb-1">{{ old_gwp }}</label>
+                  <div class="row">
+                    <div class="col">
+                      <label class="g_head mb-3">Type</label>
+                      <label class="bg_b mt_7 mb-1">New Car</label>
+                      <label class="bg_b mt_7 mb-1">Old Car</label>
+                    </div>
+
+                    <div class="col">
+                      <label class="g_head mb-3">GWP</label>
+                      <label class="bg_b mt_7 mb-1">{{ new_gwp }}</label>
+                      <label class="bg_b mt_7 mb-1">{{ old_gwp }}</label>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
 
-          <div class="col r_col">
-            <div class="row">
-              <div class="col">
-                <div class="row mb-1">
-                  <div class="col">
-                    <label class="pg_head">GWP</label>
+            <div class="col r_col">
+              <div class="row">
+                <div class="col">
+                  <div class="row mb-1">
+                    <div class="col">
+                      <label class="pg_head">GWP</label>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col">
+                      <label class="lg_head mb-3">OD</label>
+                      <input
+                        min="0"
+                        disabled
+                        class="mb-1 bg_b"
+                        type="number"
+                        placeholder="00"
+                        id="gwp"
+                        autofocus
+                        [value]="gwp_od"
+                        [ngClass]="{ error: checkError('gwp_od') }"
+                      />
+                      <input
+                        min="0"
+                        disabled
+                        class="mb-1 bg_b"
+                        type="number"
+                        placeholder="00"
+                        id="gwp"
+                        [value]="old_gwp_od"
+                        [ngClass]="{ error: checkError('old_gwp_od') }"
+                      />
+                    </div>
+
+                    <div class="col">
+                      <label class="lg_head mb-3">TP</label>
+                      <input
+                        min="0"
+                        class="mb-1 bg_b"
+                        disabled
+                        type="number"
+                        placeholder="00"
+                        id="gwp"
+                        [value]="gwp_tp"
+                        [ngClass]="{ error: checkError('gwp_tp') }"
+                      />
+                      <input
+                        min="0"
+                        class="mb-1 bg_b"
+                        disabled
+                        type="number"
+                        placeholder="00"
+                        id="gwp"
+                        [value]="old_gwp_tp"
+                        [ngClass]="{ error: checkError('old_gwp_tp') }"
+                      />
+                    </div>
                   </div>
                 </div>
 
-                <div class="row">
-                  <div class="col">
-                    <label class="lg_head mb-3">OD</label>
-                    <input
-                      disabled
-                      class="mb-1 bg_b"
-                      type="number"
-                      placeholder="00"
-                      id="gwp"
-                      autofocus
-                      [value]="gwp_od"
-                      [ngClass]="{ error: checkError('gwp_od') }"
-                    />
-                    <input
-                      disabled
-                      class="mb-1 bg_b"
-                      type="number"
-                      placeholder="00"
-                      id="gwp"
-                      [value]="old_gwp_od"
-                      [ngClass]="{ error: checkError('old_gwp_od') }"
-                    />
+                <div class="col">
+                  <div class="row mb-1">
+                    <div class="col">
+                      <label class="pg_head"
+                        >Acquisition cost on OD including IRDA %
+                        <span class="text-danger"> *</span></label
+                      >
+                    </div>
                   </div>
 
-                  <div class="col">
-                    <label class="lg_head mb-3">TP</label>
-                    <input
-                      class="mb-1 bg_b"
-                      disabled
-                      type="number"
-                      placeholder="00"
-                      id="gwp"
-                      [value]="gwp_tp"
-                      [ngClass]="{ error: checkError('gwp_tp') }"
-                    />
-                    <input
-                      class="mb-1 bg_b"
-                      disabled
-                      type="number"
-                      placeholder="00"
-                      id="gwp"
-                      [value]="old_gwp_tp"
-                      [ngClass]="{ error: checkError('old_gwp_tp') }"
-                    />
-                  </div>
-                </div>
-              </div>
+                  <div class="row">
+                    <div class="col">
+                      <label class="g_head mb-3">OD</label>
+                      <input
+                        min="0"
+                        class="mb-1"
+                        type="number"
+                        placeholder="00"
+                        id="gwp"
+                        [(ngModel)]="com_od"
+                        [ngClass]="{ error: checkError('com_od') }"
+                      />
+                      <span id="my-suffix">%</span>
 
-              <div class="col">
-                <div class="row mb-1">
-                  <div class="col">
-                    <label class="pg_head"
-                      >Acquisition cost on OD including IRDA %
-                      <span class="text-danger"> *</span></label
-                    >
-                  </div>
-                </div>
+                      <input
+                        min="0"
+                        class="mb-1"
+                        type="number"
+                        placeholder="00"
+                        id="gwp"
+                        [(ngModel)]="old_com_od"
+                        [ngClass]="{ error: checkError('old_com_od') }"
+                      />
+                      <span id="my-suffix">%</span>
+                    </div>
 
-                <div class="row">
-                  <div class="col">
-                    <label class="g_head mb-3">OD</label>
-                    <input
-                      class="mb-1"
-                      type="number"
-                      placeholder="00"
-                      id="gwp"
-                      [(ngModel)]="com_od"
-                      [ngClass]="{ error: checkError('com_od') }"
-                    />
-                    <span id="my-suffix">%</span>
-
-                    <input
-                      class="mb-1"
-                      type="number"
-                      placeholder="00"
-                      id="gwp"
-                      [(ngModel)]="old_com_od"
-                      [ngClass]="{ error: checkError('old_com_od') }"
-                    />
-                    <span id="my-suffix">%</span>
-                  </div>
-
-                  <div class="col">
-                    <label class="g_head mb-3">TP</label>
-                    <input
-                      class="mb-1 bg_b"
-                      type="text"
-                      placeholder="00"
-                      id="gwp"
-                      disabled
-                      [value]="com_tp"
-                    />
-                    <input
-                      disabled
-                      class="mb-1 bg_b"
-                      type="number"
-                      placeholder="00"
-                      id="gwp"
-                      [(ngModel)]="old_com_tp"
-                      [ngClass]="{ error: checkError('old_com_tp') }"
-                    />
-                    <span id="my-suffix">%</span>
+                    <div class="col">
+                      <label class="g_head mb-3">TP</label>
+                      <input
+                        class="mb-1 bg_b"
+                        type="text"
+                        placeholder="00"
+                        id="gwp"
+                        disabled
+                        [value]="com_tp"
+                      />
+                      <input
+                        min="0"
+                        disabled
+                        class="mb-1 bg_b"
+                        type="number"
+                        placeholder="00"
+                        id="gwp"
+                        [(ngModel)]="old_com_tp"
+                        [ngClass]="{ error: checkError('old_com_tp') }"
+                      />
+                      <span id="my-suffix">%</span>
+                    </div>
                   </div>
                 </div>
               </div>

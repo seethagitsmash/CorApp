@@ -26,6 +26,7 @@ export class PremiumMixComponent {
       this.router.navigate(['/cor/simulator/selection']);
     } else {
       let a = JSON.parse(cor);
+      this.trans_id = a.tranId;
       this.new = a.new_car_total;
       this.old = a.old_car_total;
       this.total_gwp = a.car_total;
@@ -33,6 +34,7 @@ export class PremiumMixComponent {
     }
   }
 
+  trans_id: string = '';
   new: number = 0;
   old: number = 0;
   total_gwp: number = 0;

@@ -15,6 +15,7 @@ export class CorProjectionComponent {
     private apiService: ApiService
   ) {}
 
+  trans_id: string = '';
   lr: number = 0;
   dc: number = 0;
   exp: number = 0;
@@ -67,15 +68,15 @@ export class CorProjectionComponent {
           if (e.year === '3rd Year') return e;
         });
 
-        this.lr = this.yr.lrPerc;
-        this.dc = this.yr.dcPerc;
-        this.exp = this.yr.expPerc;
-        this.cor = this.yr.corPerc;
+        this.lr = Math.round(this.yr.lrPerc);
+        this.dc = Math.round(this.yr.dcPerc);
+        this.exp = Math.round(this.yr.expPerc);
+        this.cor = Math.round(this.yr.corPerc);
 
-        this.lr_3 = this.yr_3.lrPerc;
-        this.dc_3 = this.yr_3.dcPerc;
-        this.exp_3 = this.yr_3.expPerc;
-        this.cor_3 = this.yr_3.corPerc;
+        this.lr_3 = Math.round(this.yr_3.lrPerc);
+        this.dc_3 = Math.round(this.yr_3.dcPerc);
+        this.exp_3 = Math.round(this.yr_3.expPerc);
+        this.cor_3 = Math.round(this.yr_3.corPerc);
       },
       (error) => {
         this.isSpinning = false;
@@ -107,7 +108,7 @@ export class CorProjectionComponent {
       this.router.navigate(['/cor/simulator/selection']);
     } else {
       let a = JSON.parse(cor);
-
+      this.trans_id = a.tranId;
       // Dealer
       if ('dealer_name' in a) {
         this.dealer_name = a.dealer_name;

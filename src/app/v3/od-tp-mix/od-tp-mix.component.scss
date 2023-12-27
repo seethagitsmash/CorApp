@@ -68,6 +68,18 @@
   }
 }
 
+.note {
+  width: 333px;
+  margin-left: 22px;
+
+  label {
+    font-weight: 600;
+    text-align: left;
+    padding-left: 12px;
+    background-color: yellow;
+  }
+}
+
 .l_col {
   max-width: 35%;
 }

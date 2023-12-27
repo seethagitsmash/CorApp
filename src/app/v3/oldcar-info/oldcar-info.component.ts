@@ -56,6 +56,7 @@ export class OldcarInfoComponent {
     if (cor === null) {
     } else {
       let a = JSON.parse(cor);
+      this.trans_id = a.tranId;
       this.old_gwp = a.old_car_total;
       this.old_non_ncb = +a.old_car_total - +this.old_ncb;
       this.old_above_ten = +a.old_car_total - (+this.old_four + +this.old_ten);
@@ -70,6 +71,7 @@ export class OldcarInfoComponent {
     }
   }
 
+  trans_id: string = '';
   errorList: any = [];
   old_gwp: number = 40;
   old_ncb: number = 0;
@@ -91,7 +93,7 @@ export class OldcarInfoComponent {
       setTimeout(() => {
         this.isLoading = false;
       }, 3000);
-      this.createMessage('error', 'Enter all required field values.');
+      this.createMessage('error', 'Enter valid value on all required fields.');
       return;
     }
 
